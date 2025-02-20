@@ -1,2 +1,2 @@
-# Recipes_Studio
+# CookStudio
 A Recipe Manager collaborative tool 
