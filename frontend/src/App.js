@@ -1,66 +1,66 @@
 import React, { useEffect, useState } from 'react';
-import RecetteForm from './components/RecetteForm';
-import RecetteList from './components/RecetteList';
-import LivreForm from './components/LivreForm';
-import LivreList from './components/LivreList';
-import Calendrier from './components/Calendrier';
+import RecipeForm from './components/RecipeForm';
+import RecipeList from './components/RecipeList';
+import BookForm from './components/BookForm';
+import BookList from './components/BookList';
+import Calendar from './components/Calendar';
 import axios from 'axios';
 
 function App() {
-    const [recettes, setRecettes] = useState([]);
-    const [livres, setLivres] = useState([]);
-    const [recetteToEdit, setRecetteToEdit] = useState(null);
-    const [livreToEdit, setLivreToEdit] = useState(null);
+    const [recipes, setRecipes] = useState([]);
+    const [books, setBooks] = useState([]);
+    const [recipeToEdit, setRecipeToEdit] = useState(null);
+    const [bookToEdit, setBookToEdit] = useState(null);
 
-    const fetchRecettes = async () => {
-        const response = await axios.get('http://localhost:5000/api/recettes');
-        setRecettes(response.data);
+    const fetchRecipes = async () => {
+        const response = await axios.get('http://localhost:5000/api/recipes');
+        setRecipes(response.data);
     };
 
-    const fetchLivres = async () => {
-        const response = await axios.get('http://localhost:5000/api/livres');
-        setLivres(response.data);
+    const fetchBooks = async () => {
+        const response = await axios.get('http://localhost:5000/api/books');
+        setBooks(response.data);
     };
 
-    const handleDeleteRecette = async (id) => {
-        await axios.delete(`http://localhost:5000/api/recettes/${id}`);
-        fetchRecettes();
+    const handleDeleteRecipe = async (id) => {
+        await axios.delete(`http://localhost:5000/api/recipes/${id}`);
+        fetchRecipes();
     };
 
-    const handleEditRecette = (recette) => {
-        setRecetteToEdit(recette);
+    const handleEditRecipe = (recipe) => {
+        setRecipeToEdit(recipe);
     };
 
-    const clearEditRecette = () => {
-        setRecetteToEdit(null);
+    const clearEditRecipe = () => {
+        setRecipeToEdit(null);
     };
 
-    const handleDeleteLivre = async (id) => {
-        await axios.delete(`http://localhost:5000/api/livres/${id}`);
-        fetchLivres();
+    const handleDeleteBook = async (id) => {
+        await axios.delete(`http://localhost:5000/api/books/${id}`);
+        fetchBooks();
     };
 
-    const handleEditLivre = (livre) => {
-        setLivreToEdit(livre);
+    const handleEditBook = (book) => {
+        setBookToEdit(book);
     };
 
-    const clearEditLivre = () => {
-        setLivreToEdit(null);
+    const clearEditBook = () => {
+        setBookToEdit(null);
     };
 
     useEffect(() => {
-        fetchRecettes();
-        fetchLivres();
+        fetchRecipes();
+        fetchBooks();
     }, []);
 
     return (
         <div>
-            <h1>Application de Recettes</h1>
-            <RecetteForm fetchRecettes={fetchRecettes} recetteToEdit={recetteToEdit} clearEdit={clearEditRecette} />
-            <RecetteList recettes={recettes} onDelete={handleDeleteRecette} onEdit={handleEditRecette} />
-            <LivreForm fetchLivres={fetchLivres} livreToEdit={livreToEdit} clearEdit={clearEditLivre} recettes={recettes} />
-            <LivreList livres={livres} onDelete={handleDeleteLivre} onEdit={handleEditLivre} />
-            <Calendrier recettes={recettes} />
+            <h1>Recipe Application</h1>
+            <RecipeForm fetchRecipes={fetchRecipes} recipeToEdit={recipeToEdit} clearEdit={clearEditRecipe} />
+            <RecipeList recipes={recipes} onDelete={handleDeleteRecipe} onEdit={handleEditRecipe} />
+            <BookForm fetchBooks={fetchBooks} bookToEdit={bookToEdit} clearEdit={clearEditBook} recipes={recipes} />
+            <BookList books={books} onDelete={handleDeleteBook} onEdit={handleEditBook} />
+            <Calendar recipes={recipes} />
         </div>
     );
 }

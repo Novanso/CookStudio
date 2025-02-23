@@ -1,0 +1,55 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const BookForm = ({ fetchBooks, bookToEdit, clearEdit, recipes }) => {
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [selectedRecipes, setSelectedRecipes] = useState([]);
+    const [id, setId] = useState(null);
+
+    useEffect(() => {
+        if (bookToEdit) {
+            setTitle(bookToEdit.title);
+            setDescription(bookToEdit.description);
+            setSelectedRecipes(bookToEdit.recipes.map(recipe => recipe._id));
+            setId(bookToEdit._id);
+        }
+    }, [bookToEdit]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const book = { title, description, recipes: selectedRecipes };
+
+        if (id) {
+            await axios.put(`http://localhost:5000/api/books/${id}`, book);
+            clearEdit();
+        } else {
+            await axios.post('http://localhost:5000/api/books', book);
+        }
+
+        fetchBooks();
+        setTitle('');
+        setDescription('');
+        setSelectedRecipes([]);
+    };
+
+    const handleRecipeChange = (e) => {
+        const value = Array.from(e.target.selectedOptions, option => option.value);
+        setSelectedRecipes(value);
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
+            <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description"></textarea>
+            <select multiple={true} value={selectedRecipes} onChange={handleRecipeChange}>
+                {recipes.map((recipe) => (
+                    <option key={recipe._id} value={recipe._id}>{recipe.title}</option>
+                ))}
+            </select>
+            <button type="submit">{id ? 'Edit Book' : 'Add Book'}</button>
+        </form>
+    );
+};
+
+export default BookForm;

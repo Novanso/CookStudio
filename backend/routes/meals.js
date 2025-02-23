@@ -1,47 +1,47 @@
 const express = require('express');
 const router = express.Router();
-const Repas = require('../models/repas');
+const Meal = require('../models/meal');
 
-// Créer un repas
+// Create a meal
 router.post('/', async (req, res) => {
-    const { date, type, recette } = req.body;
-    const nouveauRepas = new Repas({ date, type, recette });
+    const { date, type, recipe } = req.body;
+    const newMeal = new Meal({ date, type, recipe });
     try {
-        await nouveauRepas.save();
-        res.status(201).json(nouveauRepas);
+        await newMeal.save();
+        res.status(201).json(newMeal);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 });
 
-// Lister tous les repas
+// List all meals
 router.get('/', async (req, res) => {
     try {
-        const repas = await Repas.find().populate('recette');
-        res.json(repas);
+        const meals = await Meal.find().populate('recipe');
+        res.json(meals);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
 
-// Mettre à jour un repas
+// Update a meal
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { date, type, recette } = req.body;
+    const { date, type, recipe } = req.body;
     try {
-        const repas = await Repas.findByIdAndUpdate(id, { date, type, recette }, { new: true }).populate('recette');
-        res.json(repas);
+        const meal = await Meal.findByIdAndUpdate(id, { date, type, recipe }, { new: true }).populate('recipe');
+        res.json(meal);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 });
 
-// Supprimer un repas
+// Delete a meal
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        await Repas.findByIdAndDelete(id);
-        res.json({ message: 'Repas supprimé' });
+        await Meal.findByIdAndDelete(id);
+        res.json({ message: 'Meal deleted' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
