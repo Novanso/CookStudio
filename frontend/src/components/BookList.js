@@ -1,26 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import axios from 'axios';
 
-const BookList = ({ books, onDelete, onEdit }) => {
-    return (
-        <div>
-            <h2>Recipe Books</h2>
-            <ul>
-                {books.map((book) => (
-                    <li key={book._id}>
-                        <h3>{book.title}</h3>
-                        <p>{book.description}</p>
-                        <ul>
-                            {book.recipes.map((recipe) => (
-                                <li key={recipe._id}>{recipe.title}</li>
-                            ))}
-                        </ul>
-                        <button onClick={() => onEdit(book)}>Edit</button>
-                        <button onClick={() => onDelete(book._id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-};
+const BookList = () => {
+  const [books, setBooks] = useState([]);
+
+  const fetchBooks = useCallback(async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/books');
+      setBooks(response.data);
+    } catch (error) {
+      console.error('Error fetching books:', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchBooks();
+  }, [fetchBooks]);
+
+  return (
+    <div>
+      <ul>
+        {books.map(book => (
+          <li key={book.id}>{book.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export default BookList;

@@ -1,50 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-const RecipeForm = ({ fetchRecipes, recipeToEdit, clearEdit, authToken }) => {
-    const [title, setTitle] = useState('');
-    const [ingredients, setIngredients] = useState('');
-    const [steps, setSteps] = useState('');
-    const [id, setId] = useState(null);
+const RegisterForm = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
-    useEffect(() => {
-        if (recipeToEdit) {
-            setTitle(recipeToEdit.title);
-            setIngredients(recipeToEdit.ingredients.join(', '));
-            setSteps(recipeToEdit.steps);
-            setId(recipeToEdit._id);
-        }
-    }, [recipeToEdit]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const recipe = { title, ingredients: ingredients.split(','), steps };
+    try {
+      await axios.post('http://localhost:5000/api/auth/register', { username, password });
+      setSuccess("Registration successful! You can now log in.");
+      setError(null);
+    } catch (error) {
+      const errorMessage = error.response && error.response.data ? error.response.data.error : 'Registration failed';
+      setError(errorMessage);
+    }
+  };
 
-        const config = {
-            headers: { Authorization: `Bearer ${authToken}` }
-        };
-
-        if (id) {
-            await axios.put(`http://localhost:5000/api/recipes/${id}`, recipe, config);
-            clearEdit();
-        } else {
-            await axios.post('http://localhost:5000/api/recipes', recipe, config);
-        }
-
-        fetchRecipes();
-        setTitle('');
-        setIngredients('');
-        setSteps('');
-    };
-
-    return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
-            <input type="text" value={ingredients} onChange={(e) => setIngredients(e.target.value)} placeholder="Ingredients (separated by commas)" required />
-            <textarea value={steps} onChange={(e) => setSteps(e.target.value)} placeholder="Steps" required></textarea>
-            <button type="submit">{id ? 'Edit Recipe' : 'Add Recipe'}</button>
-        </form>
-    );
+  return (
+    <div>
+      <h1>Register Form</h1>
+      {error && <p>{error}</p>}
+      {success && <p>{success}</p>}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  );
 };
 
-export default RecipeForm;
+export default RegisterForm;

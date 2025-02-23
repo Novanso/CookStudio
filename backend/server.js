@@ -1,27 +1,29 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const cors = require('cors');
-
-const recipesRouter = require('./routes/recipes');
-const booksRouter = require('./routes/books');
-const mealsRouter = require('./routes/meals');
-const authRouter = require('./routes/auth');
+const recipeRoute = require('./routes/recipeRoute');
+const authRoute = require('./routes/auth');
+require('dotenv').config(); // Charger le module dotenv
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use('/api/recipes', recipesRouter);
-app.use('/api/books', booksRouter);
-app.use('/api/meals', mealsRouter);
-app.use('/api/auth', authRouter);
+const corsOptions = {
+  origin: 'http://localhost:3000', // Remplacez par l'origine de votre frontend
+  optionsSuccessStatus: 200,
+};
 
-mongoose.connect('mongodb://localhost:27017/recipes')
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.log(err));
+app.use(cors(corsOptions)); // Utiliser le middleware CORS avec des options
+app.use(express.json());
+app.use(recipeRoute);
+app.use('/api/auth', authRoute); // Utiliser les routes d'authentification
 
-app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
+mongoose.connect(process.env.MONGODB_URL);
+
+mongoose.connection.once('open', () => {
+  console.log('Connected to MongoDB');
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });

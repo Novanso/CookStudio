@@ -1,72 +1,41 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { format, addDays, startOfWeek } from 'date-fns';
 
-const Calendar = ({ recipes, authToken }) => {
-    const [meals, setMeals] = useState([]);
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedRecipe, setSelectedRecipe] = useState('');
-    const [selectedType, setSelectedType] = useState('lunch');
+const Calendar = () => {
+  const [recipes, setRecipes] = useState([]);
+  const [error, setError] = useState(null);
 
-    const fetchMeals = useCallback(async () => {
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const token = localStorage.getItem('authToken');
         const config = {
-            headers: { Authorization: `Bearer ${authToken}` }
+          headers: { Authorization: `Bearer ${token}` },
         };
-        const response = await axios.get('http://localhost:5000/api/meals', config);
-        setMeals(response.data);
-    }, [authToken]);
-
-    const handleAddMeal = async () => {
-        const newMeal = {
-            date: selectedDate,
-            type: selectedType,
-            recipe: selectedRecipe
-        };
-        const config = {
-            headers: { Authorization: `Bearer ${authToken}` }
-        };
-        await axios.post('http://localhost:5000/api/meals', newMeal, config);
-        fetchMeals();
+        const response = await axios.get('http://localhost:5000/api/recipes', config);
+        setRecipes(response.data);
+      } catch (error) {
+        const errorMessage = error.response && error.response.data ? error.response.data.error : 'Failed to fetch recipes';
+        setError(errorMessage);
+      }
     };
 
-    useEffect(() => {
-        fetchMeals();
-    }, [fetchMeals]);
+    fetchRecipes();
+  }, []);
 
-    const days = Array.from({ length: 7 }, (_, i) => addDays(startOfWeek(selectedDate), i));
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
-    return (
-        <div>
-            <h2>Meal Calendar</h2>
-            <div>
-                {days.map(day => (
-                    <div key={day}>
-                        <h3>{format(day, 'eeee d MMMM')}</h3>
-                        <ul>
-                            {meals.filter(m => format(new Date(m.date), 'yyyy-MM-dd') === format(day, 'yyyy-MM-dd')).map(m => (
-                                <li key={m._id}>{m.type}: {m.recipe.title}</li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
-            </div>
-            <div>
-                <h3>Add a Meal</h3>
-                <input type="date" value={format(selectedDate, 'yyyy-MM-dd')} onChange={e => setSelectedDate(new Date(e.target.value))} />
-                <select value={selectedType} onChange={e => setSelectedType(e.target.value)}>
-                    <option value="lunch">Lunch</option>
-                    <option value="dinner">Dinner</option>
-                </select>
-                <select value={selectedRecipe} onChange={e => setSelectedRecipe(e.target.value)}>
-                    <option value="">Select a recipe</option>
-                    {recipes.map(recipe => (
-                        <option key={recipe._id} value={recipe._id}>{recipe.title}</option>
-                    ))}
-                </select>
-                <button onClick={handleAddMeal}>Add</button>
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <ul>
+        {recipes.map(recipe => (
+          <li key={recipe.id}>{recipe.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default Calendar;
