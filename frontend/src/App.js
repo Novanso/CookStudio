@@ -3,6 +3,7 @@ import RecetteForm from './components/RecetteForm';
 import RecetteList from './components/RecetteList';
 import LivreForm from './components/LivreForm';
 import LivreList from './components/LivreList';
+import Calendrier from './components/Calendrier';
 import axios from 'axios';
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
             <RecetteList recettes={recettes} onDelete={handleDeleteRecette} onEdit={handleEditRecette} />
             <LivreForm fetchLivres={fetchLivres} livreToEdit={livreToEdit} clearEdit={clearEditLivre} recettes={recettes} />
             <LivreList livres={livres} onDelete={handleDeleteLivre} onEdit={handleEditLivre} />
+            <Calendrier recettes={recettes} />
         </div>
     );
 }
