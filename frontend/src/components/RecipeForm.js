@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const RecipeForm = ({ fetchRecipes, recipeToEdit, clearEdit }) => {
+const RecipeForm = ({ fetchRecipes, recipeToEdit, clearEdit, authToken }) => {
     const [title, setTitle] = useState('');
     const [ingredients, setIngredients] = useState('');
     const [steps, setSteps] = useState('');
@@ -20,11 +20,15 @@ const RecipeForm = ({ fetchRecipes, recipeToEdit, clearEdit }) => {
         e.preventDefault();
         const recipe = { title, ingredients: ingredients.split(','), steps };
 
+        const config = {
+            headers: { Authorization: `Bearer ${authToken}` }
+        };
+
         if (id) {
-            await axios.put(`http://localhost:5000/api/recipes/${id}`, recipe);
+            await axios.put(`http://localhost:5000/api/recipes/${id}`, recipe, config);
             clearEdit();
         } else {
-            await axios.post('http://localhost:5000/api/recipes', recipe);
+            await axios.post('http://localhost:5000/api/recipes', recipe, config);
         }
 
         fetchRecipes();

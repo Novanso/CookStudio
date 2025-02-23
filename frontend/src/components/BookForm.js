@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const BookForm = ({ fetchBooks, bookToEdit, clearEdit, recipes }) => {
+const BookForm = ({ fetchBooks, bookToEdit, clearEdit, recipes, authToken }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [selectedRecipes, setSelectedRecipes] = useState([]);
@@ -20,11 +20,15 @@ const BookForm = ({ fetchBooks, bookToEdit, clearEdit, recipes }) => {
         e.preventDefault();
         const book = { title, description, recipes: selectedRecipes };
 
+        const config = {
+            headers: { Authorization: `Bearer ${authToken}` }
+        };
+
         if (id) {
-            await axios.put(`http://localhost:5000/api/books/${id}`, book);
+            await axios.put(`http://localhost:5000/api/books/${id}`, book, config);
             clearEdit();
         } else {
-            await axios.post('http://localhost:5000/api/books', book);
+            await axios.post('http://localhost:5000/api/books', book, config);
         }
 
         fetchBooks();

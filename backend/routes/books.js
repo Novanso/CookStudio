@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const Book = require('../models/book');
+const auth = require('../middleware/auth');
 
 // Create a book
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const { title, description, recipes } = req.body;
-    const newBook = new Book({ title, description, recipes });
+    const newBook = new Book({ title, description, recipes, user: req.user.id });
     try {
         await newBook.save();
         res.status(201).json(newBook);
@@ -14,10 +15,10 @@ router.post('/', async (req, res) => {
     }
 });
 
-// List all books
-router.get('/', async (req, res) => {
+// List all books for the logged-in user
+router.get('/', auth, async (req, res) => {
     try {
-        const books = await Book.find().populate('recipes');
+        const books = await Book.find({ user: req.user.id }).populate('recipes');
         res.json(books);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -25,11 +26,11 @@ router.get('/', async (req, res) => {
 });
 
 // Update a book
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     const { id } = req.params;
     const { title, description, recipes } = req.body;
     try {
-        const book = await Book.findByIdAndUpdate(id, { title, description, recipes }, { new: true }).populate('recipes');
+        const book = await Book.findOneAndUpdate({ _id: id, user: req.user.id }, { title, description, recipes }, { new: true }).populate('recipes');
         res.json(book);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -37,10 +38,10 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete a book
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     const { id } = req.params;
     try {
-        await Book.findByIdAndDelete(id);
+        await Book.findOneAndDelete({ _id: id, user: req.user.id });
         res.json({ message: 'Book deleted' });
     } catch (error) {
         res.status(500).json({ message: error.message });

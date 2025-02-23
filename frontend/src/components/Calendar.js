@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { format, addDays, startOfWeek } from 'date-fns';
 
-const Calendar = ({ recipes }) => {
+const Calendar = ({ recipes, authToken }) => {
     const [meals, setMeals] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedRecipe, setSelectedRecipe] = useState('');
     const [selectedType, setSelectedType] = useState('lunch');
 
-    const fetchMeals = async () => {
-        const response = await axios.get('http://localhost:5000/api/meals');
+    const fetchMeals = useCallback(async () => {
+        const config = {
+            headers: { Authorization: `Bearer ${authToken}` }
+        };
+        const response = await axios.get('http://localhost:5000/api/meals', config);
         setMeals(response.data);
-    };
+    }, [authToken]);
 
     const handleAddMeal = async () => {
         const newMeal = {
@@ -19,13 +22,16 @@ const Calendar = ({ recipes }) => {
             type: selectedType,
             recipe: selectedRecipe
         };
-        await axios.post('http://localhost:5000/api/meals', newMeal);
+        const config = {
+            headers: { Authorization: `Bearer ${authToken}` }
+        };
+        await axios.post('http://localhost:5000/api/meals', newMeal, config);
         fetchMeals();
     };
 
     useEffect(() => {
         fetchMeals();
-    }, []);
+    }, [fetchMeals]);
 
     const days = Array.from({ length: 7 }, (_, i) => addDays(startOfWeek(selectedDate), i));
 
