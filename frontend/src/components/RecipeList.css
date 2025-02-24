@@ -1,0 +1,39 @@
+.recipe-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .recipe-card {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #5D4042;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  .add-recipe-card {
+    background-color: inherit;
+    border: 1px solid #5D4042;
+  }
+  
+  .recipe-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .recipe-form div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .recipe-form button {
+    align-self: flex-start;
+  }
