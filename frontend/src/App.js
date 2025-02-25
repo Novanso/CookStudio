@@ -16,8 +16,6 @@ import CalendarIcon from './icons/Calendar.svg';
 import CollapseIcon from './icons/Collapse.svg';
 import ExpandIcon from './icons/Expand.svg';
 import LogoutIcon from './icons/Logout.svg';
-import backIcon from './icons/back.svg';
-import nextIcon from './icons/next.svg';
 
 function App() {
   const [authToken, setAuthToken] = useState(null);
@@ -111,8 +109,8 @@ function App() {
       <div className="main-content">
         <div className="horizontal-nav">
           <div className="nav-buttons">
-            <button onClick={goBack}><img src={backIcon} alt="Home" className="nav-icon" /></button>
-            <button onClick={goForward}><img src={nextIcon} alt="Home" className="nav-icon" /></button>
+            <button onClick={goBack}>Back</button>
+            <button onClick={goForward}>Forward</button>
           </div>
           <h1>{pageTitle}</h1> {/* Afficher dynamiquement le titre de la page */}
           <div className="auth-buttons">
@@ -135,7 +133,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/recipes" element={<RecipeList />} />
-            <Route path="/books" element={<BookList />} />
+            <Route path="/books" element={<BookList authToken={authToken} />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
             <Route path="/register" element={<RegisterForm />} />
