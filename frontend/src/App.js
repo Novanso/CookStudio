@@ -21,7 +21,7 @@ function App() {
   const [authToken, setAuthToken] = useState(null);
   const [username, setUsername] = useState('');
   const [pageTitle, setPageTitle] = useState('Tools'); // State pour le titre de la page
-  const [isNavCollapsed, setIsNavCollapsed] = useState(true); // State pour gérer la rétraction de la barre de navigation
+  const [isNavCollapsed, setIsNavCollapsed] = useState(false); // State pour gérer la rétraction de la barre de navigation
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -102,7 +102,7 @@ function App() {
           <li><Link to="/books"><img src={BooksIcon} alt="Books" className="nav-icon" />{!isNavCollapsed && ' Books'}</Link></li>
           <li><Link to="/calendar"><img src={CalendarIcon} alt="Calendar" className="nav-icon" />{!isNavCollapsed && ' Calendar'}</Link></li>
         </ul>
-        <button className="collapse-btn">
+        <button className="collapse-btn" onClick={toggleNavCollapse}>
           <img src={isNavCollapsed ? ExpandIcon : CollapseIcon} alt="Toggle Navigation" className="toggle-icon" />
         </button>
       </div>
@@ -133,7 +133,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/recipes" element={<RecipeList />} />
-            <Route path="/books" element={<BookList authToken={authToken} />} />
+            <Route path="/books" element={<BookList />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
             <Route path="/register" element={<RegisterForm />} />
