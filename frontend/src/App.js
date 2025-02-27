@@ -16,12 +16,14 @@ import CalendarIcon from './icons/Calendar.svg';
 import CollapseIcon from './icons/Collapse.svg';
 import ExpandIcon from './icons/Expand.svg';
 import LogoutIcon from './icons/Logout.svg';
+import NextIcon from './icons/Next.svg';
+import BackIcon from './icons/Back.svg';
 
 function App() {
   const [authToken, setAuthToken] = useState(null);
   const [username, setUsername] = useState('');
   const [pageTitle, setPageTitle] = useState('Tools'); // State pour le titre de la page
-  const [isNavCollapsed, setIsNavCollapsed] = useState(false); // State pour gérer la rétraction de la barre de navigation
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true); // State pour gérer la rétraction de la barre de navigation
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -95,22 +97,22 @@ function App() {
   return (
     <div className={`app-container ${isNavCollapsed ? 'collapsed' : ''}`}>
       <div className="vertical-nav">
-        <img src={isNavCollapsed ? "https://i.imgur.com/FT2gTAl.png" : "https://i.imgur.com/YLp3k38.png"} alt="Logo" className="Main_Logo" />
+        <img src={isNavCollapsed ? "https://i.imgur.com/PdseOyn.png" : "https://i.imgur.com/YLp3k38.png"} alt="Logo" className="Main_Logo" />
         <ul>
           <li><Link to="/"><img src={HomeIcon} alt="Home" className="nav-icon" />{!isNavCollapsed && ' Home'}</Link></li>
           <li><Link to="/recipes"><img src={RecipesIcon} alt="Recipes" className="nav-icon" />{!isNavCollapsed && ' Recipes'}</Link></li>
           <li><Link to="/books"><img src={BooksIcon} alt="Books" className="nav-icon" />{!isNavCollapsed && ' Books'}</Link></li>
           <li><Link to="/calendar"><img src={CalendarIcon} alt="Calendar" className="nav-icon" />{!isNavCollapsed && ' Calendar'}</Link></li>
         </ul>
-        <button className="collapse-btn" onClick={toggleNavCollapse}>
+        <button className="collapse-btn">
           <img src={isNavCollapsed ? ExpandIcon : CollapseIcon} alt="Toggle Navigation" className="toggle-icon" />
         </button>
       </div>
       <div className="main-content">
         <div className="horizontal-nav">
           <div className="nav-buttons">
-            <button onClick={goBack}>Back</button>
-            <button onClick={goForward}>Forward</button>
+            <button onClick={goBack}><img src={BackIcon} alt="Back" className="nav-icon" /></button>
+            <button onClick={goForward}><img src={NextIcon} alt="Next" className="nav-icon" /></button>
           </div>
           <h1>{pageTitle}</h1> {/* Afficher dynamiquement le titre de la page */}
           <div className="auth-buttons">

@@ -18,22 +18,21 @@ body {
   padding: 5px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
 }
 
 .Main_Logo {
   width: 12em;
-  margin-bottom: 10px;
 }
 
 .vertical-nav ul {
-  margin-top: -100px;
+  margin-top: 1vh;
   list-style: none;
   padding: 0;
 }
 
 .vertical-nav ul li {
-  margin: 10px 0 70px 0;
+  margin: 0 0 4vh 0;
   font-size: 30px;
 }
 
@@ -47,13 +46,13 @@ body {
   text-decoration: none;
   display: flex;
   align-items: center;
+  height: 50px;
+  width: 50px;
 }
 
 .vertical-nav ul li a img.nav-icon {
   width: 1em;
   height: 1em;
-  padding-top: 10px;
-  margin-right: 10px;
 }
 
 .vertical-nav .collapse-btn {
@@ -66,6 +65,8 @@ body {
   display: inline-block;
   font-size: 10px;
   cursor: pointer;
+  position: absolute;
+  bottom:   0;
 }
 
 .horizontal-nav {
@@ -96,7 +97,7 @@ body {
 }
 
 button {
-  background-color: #4caf50;
+  background: none;
   border: none;
   color: white;
   padding: 10px 20px;
