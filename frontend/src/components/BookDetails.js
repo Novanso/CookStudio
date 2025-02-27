@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import './style/BookDetails.css'
+
+import EditIcon from '../icons/Edit.svg';
+import DeleteIcon from '../icons/Delete.svg';
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -35,7 +39,11 @@ const BookDetails = () => {
 
   return (
     <div>
-      <h1>{book.title}</h1>
+      <div class="bookHeader">
+              <h1>{book.title}</h1>
+              <button><img src={EditIcon} alt="Edit" className="edit-icon" /></button>
+              <button><img src={DeleteIcon} alt="Delete" className="delete-icon" /></button>
+            </div>
       <p>{book.description}</p>
       <h2>Recipes</h2>
       <ul>

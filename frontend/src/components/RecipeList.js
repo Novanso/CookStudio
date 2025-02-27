@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './RecipeList.css'; // Importer le fichier CSS pour les styles
+import './style/RecipeList.css'; // Importer le fichier CSS pour les styles
 
 const RecipeList = () => {
   const [recipes, setRecipes] = useState([]);

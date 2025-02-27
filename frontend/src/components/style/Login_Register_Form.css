@@ -1,0 +1,22 @@
+.Form {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+input {
+    margin: 5px;
+    display: block;
+}
+
+#Login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#Register {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

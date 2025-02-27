@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './style/Login_Register_Form.css'
 
 const LoginForm = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -19,10 +20,9 @@ const LoginForm = ({ onLogin }) => {
   };
 
   return (
-    <div>
-      <h1>Login Form</h1>
+    <div class="Form">
       {error && <p>{error}</p>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="Login">
         <input
           type="text"
           placeholder="Username"
