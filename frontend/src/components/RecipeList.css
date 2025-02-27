@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     border: 1px solid #5D4042;
-    border-radius: 8px;
+    border-radius: 20%;
     text-align: center;
     cursor: pointer;
     color: #fff;
@@ -32,8 +32,4 @@
   .recipe-form div {
     display: flex;
     flex-direction: column;
-  }
-  
-  .recipe-form button {
-    align-self: flex-start;
   }

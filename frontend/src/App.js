@@ -15,6 +15,7 @@ import BooksIcon from './icons/Library.svg';
 import CalendarIcon from './icons/Calendar.svg';
 import CollapseIcon from './icons/Collapse.svg';
 import ExpandIcon from './icons/Expand.svg';
+import LoginIcon from './icons/Login.svg';
 import LogoutIcon from './icons/Logout.svg';
 import NextIcon from './icons/Next.svg';
 import BackIcon from './icons/Back.svg';
