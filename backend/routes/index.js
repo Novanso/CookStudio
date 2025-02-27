@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.use('/api/books', require('./bookRoute'));
-router.use('/api/recipes', require('./recipeRoute'));
+router.use('/books', require('./bookRoute'));
+router.use('/recipes', require('./recipeRoute'));
 
 module.exports = router;

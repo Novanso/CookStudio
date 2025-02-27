@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const recipeRoute = require('./routes/recipeRoute');
-const bookRoute = require('./routes/recipeRoute');
+const bookRoute = require('./routes/bookRoute');
 const authRoute = require('./routes/auth');
 require('dotenv').config(); // Charger le module dotenv
 

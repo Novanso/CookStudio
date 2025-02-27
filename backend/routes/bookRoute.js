@@ -21,6 +21,7 @@ router.post('/api/books', auth, async (req, res) => {
     await newBook.save();
     res.status(201).send(newBook);
   } catch (error) {
+    console.log(req.user.id)
     res.status(400).send(error);
   }
 });
