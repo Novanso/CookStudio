@@ -10,7 +10,7 @@ import './App.css';
 
 // Importer les icônes
 import HomeIcon from './icons/Home.svg';
-import RecipesIcon from './icons/Book.svg';
+import RecipesIcon from './icons/Recipe.svg';
 import BooksIcon from './icons/Library.svg';
 import CalendarIcon from './icons/Calendar.svg';
 import CollapseIcon from './icons/Collapse.svg';

@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const recipeRoute = require('./routes/recipeRoute');
+const bookRoute = require('./routes/bookRoute');
 const authRoute = require('./routes/auth');
 require('dotenv').config(); // Charger le module dotenv
 
@@ -16,6 +17,7 @@ const corsOptions = {
 app.use(cors(corsOptions)); // Utiliser le middleware CORS avec des options
 app.use(express.json());
 app.use(recipeRoute);
+app.use(bookRoute);
 app.use('/api/auth', authRoute); // Utiliser les routes d'authentification
 
 mongoose.connect(process.env.MONGODB_URL);
