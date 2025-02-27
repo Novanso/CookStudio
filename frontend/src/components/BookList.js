@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './BookList.css'; // Importer le fichier CSS pour les styles
 
 const BookList = () => {
@@ -11,6 +12,7 @@ const BookList = () => {
   const [showForm, setShowForm] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -78,6 +80,10 @@ const BookList = () => {
     setSelectedRecipes(value);
   };
 
+  const handleCardClick = (id) => {
+    navigate(`/books/${id}`);
+  };
+
   return (
     <div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -87,7 +93,7 @@ const BookList = () => {
           <p>Add Book</p>
         </div>
         {books.map((book) => (
-          <div className="book-card" key={book._id}>
+          <div className="book-card" key={book._id} onClick={() => handleCardClick(book._id)}>
             <p>{book.title}</p>
           </div>
         ))}

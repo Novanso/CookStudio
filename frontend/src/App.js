@@ -6,6 +6,9 @@ import BookList from './components/BookList';
 import Calendar from './components/Calendar';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
+
+import BookDetails from './components/BookDetails';
+import RecipeDetails from './components/RecipeDetails';
 import './App.css';
 
 // Importer les icônes
@@ -15,7 +18,6 @@ import BooksIcon from './icons/Library.svg';
 import CalendarIcon from './icons/Calendar.svg';
 import CollapseIcon from './icons/Collapse.svg';
 import ExpandIcon from './icons/Expand.svg';
-import LoginIcon from './icons/Login.svg';
 import LogoutIcon from './icons/Logout.svg';
 import NextIcon from './icons/Next.svg';
 import BackIcon from './icons/Back.svg';
@@ -63,7 +65,7 @@ function App() {
         setPageTitle('Register');
         break;
       default:
-        setPageTitle('Tools');
+        setPageTitle('');
     }
   }, [location.pathname]);
 
@@ -140,6 +142,8 @@ function App() {
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
             <Route path="/register" element={<RegisterForm />} />
+            <Route path="/books/:id" element={<BookDetails />} />
+            <Route path="/recipes/:id" element={<RecipeDetails />} />
           </Routes>
         </div>
       </div>

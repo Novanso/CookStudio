@@ -13,6 +13,20 @@ router.get('/api/books', auth, async (req, res) => {
   }
 });
 
+// Get book by ID
+router.get('/api/books/:id', auth, async (req, res) => {
+  const { id } = req.params;
+  try {
+    const book = await Book.findById(id).populate('recipes');
+    if (!book) {
+      return res.status(404).send({ error: 'Book not found' });
+    }
+    res.send(book);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 // Create a book
 router.post('/api/books', auth, async (req, res) => {
   const { title, description, recipes } = req.body;

@@ -13,6 +13,20 @@ router.get('/api/recipes', auth, async (req, res) => {
   }
 });
 
+// Get recipe by ID
+router.get('/api/recipes/:id', auth, async (req, res) => {
+  const { id } = req.params;
+  try {
+    const recipe = await Recipe.findById(id);
+    if (!recipe) {
+      return res.status(404).send({ error: 'Recipe not found' });
+    }
+    res.send(recipe);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 // Create a recipe
 router.post('/api/recipes', auth, async (req, res) => {
   const { name, ingredients, instructions } = req.body;

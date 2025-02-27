@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './RecipeList.css'; // Importer le fichier CSS pour les styles
 
 const RecipeList = () => {
@@ -10,6 +11,7 @@ const RecipeList = () => {
   const [showForm, setShowForm] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -58,6 +60,10 @@ const RecipeList = () => {
     }
   };
 
+  const handleCardClick = (id) => {
+    navigate(`/recipes/${id}`);
+  };
+
   return (
     <div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -67,8 +73,8 @@ const RecipeList = () => {
           <p>Add Recipe</p>
         </div>
         {recipes.map((recipe) => (
-          <div className="recipe-card" key={recipe._id}>
-            <p class="cardTitle">{recipe.name}</p>
+          <div className="recipe-card" key={recipe._id} onClick={() => handleCardClick(recipe._id)}>
+            <p className="cardTitle">{recipe.name}</p>
           </div>
         ))}
       </div>
