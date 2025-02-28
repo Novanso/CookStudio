@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './style/RecipeDetails.css'
 
 import EditIcon from '../icons/Edit.svg';
@@ -10,6 +10,7 @@ const RecipeDetails = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecipeDetails = async () => {
@@ -29,6 +30,20 @@ const RecipeDetails = () => {
     fetchRecipeDetails();
   }, [id]);
 
+  const handleDelete = async () => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      await axios.delete(`http://localhost:5000/api/recipes/${id}`, config);
+      navigate('/recipes');
+    } catch (error) {
+      const errorMessage = error.response && error.response.data ? error.response.data.error : 'Failed to delete recipe';
+      setError(errorMessage);
+    }
+  };
+
   if (error) {
     return <p style={{ color: 'red' }}>{error}</p>;
   }
@@ -42,7 +57,7 @@ const RecipeDetails = () => {
       <div class="recipeHeader">
         <h1>{recipe.name}</h1>
         <button><img src={EditIcon} alt="Edit" className="edit-icon" /></button>
-        <button><img src={DeleteIcon} alt="Delete" className="delete-icon" /></button>
+        <button onClick={handleDelete}><img src={DeleteIcon} alt="Delete" className="delete-icon" /></button>
       </div>
       <p>{recipe.instructions}</p>
       <h2>Ingredients</h2>

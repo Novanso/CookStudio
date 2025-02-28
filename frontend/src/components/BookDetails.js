@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './style/BookDetails.css'
 
 import EditIcon from '../icons/Edit.svg';
@@ -10,6 +10,7 @@ const BookDetails = () => {
   const { id } = useParams();
   const [book, setBook] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBookDetails = async () => {
@@ -25,9 +26,22 @@ const BookDetails = () => {
         setError(errorMessage);
       }
     };
-
     fetchBookDetails();
   }, [id]);
+
+  const handleDelete = async () => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      await axios.delete(`http://localhost:5000/api/books/${id}`, config);
+      navigate('/books');
+    } catch (error) {
+      const errorMessage = error.response && error.response.data ? error.response.data.error : 'Failed to delete book';
+      setError(errorMessage);
+    }
+  };
 
   if (error) {
     return <p style={{ color: 'red' }}>{error}</p>;
@@ -42,7 +56,7 @@ const BookDetails = () => {
       <div class="bookHeader">
               <h1>{book.title}</h1>
               <button><img src={EditIcon} alt="Edit" className="edit-icon" /></button>
-              <button><img src={DeleteIcon} alt="Delete" className="delete-icon" /></button>
+              <button onClick={handleDelete}><img src={DeleteIcon} alt="Delete" className="delete-icon" /></button>
             </div>
       <p>{book.description}</p>
       <h2>Recipes</h2>
