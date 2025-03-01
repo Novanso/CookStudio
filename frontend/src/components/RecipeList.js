@@ -81,34 +81,25 @@ const RecipeList = () => {
 
       {showForm && (
         <form onSubmit={handleSubmit} className="recipe-form">
-          <div>
-            <label>Recipe Name:</label>
-            <input
-              type="text"
-              value={recipeName}
-              onChange={(e) => setRecipeName(e.target.value)}
-              required
-            />
+          <div class="input-container ic1">
+            <input id="name" class="input" type="text" placeholder=" " value={recipeName} onChange={(e) => setRecipeName(e.target.value)} required/>
+            <div class="cut"></div>
+            <label for="name" class="placeholder">Recipe Name</label>
           </div>
-          <div>
-            <label>Ingredients (comma separated):</label>
-            <input
-              type="text"
-              value={ingredients}
-              onChange={(e) => setIngredients(e.target.value)}
-              required
-            />
+          <div class="input-container ic2">
+            <input id="ingredients" class="input" type="text" placeholder=" " value={ingredients} onChange={(e) => setIngredients(e.target.value)} required/>
+            <div class="cut"></div>
+            <label for="ingredients" class="placeholder">Ingredients :</label>
           </div>
-          <div>
-            <label>Instructions:</label>
-            <textarea
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
-              required
-            ></textarea>
+          <div class="input-container ic2">
+            <textarea id="name" class="input" type="text" placeholder=" " value={instructions} onChange={(e) => setInstructions(e.target.value)} required></textarea>
+            <div class="cut"></div>
+            <label for="instructions" class="placeholder">Instructions:</label>
           </div>
-          <button type="submit">Add Recipe</button>
-          <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
+          <div class="buttons">
+            <button type="submit" class="submit">Add Recipe</button>
+            <button type="button"class="cancel" onClick={() => setShowForm(false)}>Cancel</button>
+          </div>
         </form>
       )}
     </div>

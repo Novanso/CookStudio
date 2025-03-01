@@ -98,35 +98,36 @@ const BookList = () => {
           </div>
         ))}
       </div>
+      <link rel="stylesheet" href="https:\\cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"></link>
 
       {showForm && (
         <form onSubmit={handleSubmit} className="book-form">
-          <div>
-            <label>Book Title:</label>
-            <input
-              type="text"
-              value={bookTitle}
-              onChange={(e) => setBookTitle(e.target.value)}
-              required
-            />
+          <div class="input-container ic1">
+            <input type="text" id="title" class="input" value={bookTitle} placeholder=" " onChange={(e) => setBookTitle(e.target.value)} required/>
+            <div class="cut"></div> 
+            <label for="title" class="placeholder">Book Title</label>
           </div>
-          <div>
-            <label>Description:</label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
+          <div class="input-container ic2">
+            <textarea id="description" class="input" placeholder=" " value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+            <div class="cut"></div>
+            <label for="description" class="placeholder">Description</label>
           </div>
-          <div>
-            <label>Recipes:</label>
-            <select multiple={true} value={selectedRecipes} onChange={handleRecipeChange}>
+          <div class="input-container ic2" id="select_form">
+            <select id="recipes" multiple="multiple" placeholder=" " class="input" value={selectedRecipes} onChange={handleRecipeChange}>
               {recipes.map((recipe) => (
-                <option key={recipe._id} value={recipe._id}>{recipe.name}</option>
+                <option type="checkbox" class="item" key={recipe._id} value={recipe._id}>
+                  <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+                  <label>{recipe.name}</label>
+                </option>
               ))}
             </select>
+            <div class="cut"></div>
+            <label for="recipes" class="placeholder">Recipes</label>
           </div>
-          <button type="submit">Add Book</button>
-          <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
+          <div class="buttons">
+            <button type="submit" class="submit">Add Book</button>
+            <button type="button" class="cancel" onClick={() => setShowForm(false)}>Cancel</button>
+          </div>
         </form>
       )}
     </div>

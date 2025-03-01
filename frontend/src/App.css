@@ -145,11 +145,6 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #F1FFE650;
-  border-radius: 10%;
-}
-
 .main-content {
   flex: 1;
   display: flex;
