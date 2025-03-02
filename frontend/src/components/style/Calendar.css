@@ -1,0 +1,44 @@
+.fullscreen-calendar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    background: none;
+}
+
+.react-calendar {
+    border: none;
+    box-shadow: none;
+    background-color: #281B1C;
+    width: 80%;
+    height:100%;
+}
+.meal-selector {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.meal-columns {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.meal-column div {
+    color: black;
+}
+
+.meal-column h3 {
+    margin-bottom: 10px;
+}
+
+.meal-column select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+  
