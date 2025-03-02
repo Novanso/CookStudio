@@ -46,13 +46,6 @@ const BookList = () => {
     fetchRecipes();
   }, []);
 
-  const items = document.querySelectorAll(".item")
-  items.forEach(item => {
-    item.addEventListener("click", () => {
-      item.classList.toggle("checked")
-    })
-  })
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -82,9 +75,14 @@ const BookList = () => {
     }
   };
 
-  const handleRecipeChange = (e) => {
-    const value = Array.from(e.target.selectedOptions, option => option.value);
-    setSelectedRecipes(value);
+  const handleRecipeClick = (recipeId) => {
+    setSelectedRecipes((prevSelectedRecipes) => {
+      if (prevSelectedRecipes.includes(recipeId)) {
+        return prevSelectedRecipes.filter((id) => id !== recipeId);
+      } else {
+        return [...prevSelectedRecipes, recipeId];
+      }
+    });
   };
 
   const handleCardClick = (id) => {
@@ -106,35 +104,38 @@ const BookList = () => {
         ))}
       </div>
       <link rel="stylesheet" href="https:\\cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"></link>
-      <script></script>
 
       {showForm && (
         <form onSubmit={handleSubmit} className="book-form">
-          <div class="input-container ic1">
-            <input type="text" id="title" class="input" value={bookTitle} placeholder=" " onChange={(e) => setBookTitle(e.target.value)} required/>
-            <div class="cut"></div> 
-            <label for="title" class="placeholder">Book Title</label>
+          <div className="input-container ic1">
+            <input type="text" id="title" className="input" value={bookTitle} placeholder=" " onChange={(e) => setBookTitle(e.target.value)} required/>
+            <div className="cut"></div> 
+            <label for="title" className="placeholder">Book Title</label>
           </div>
-          <div class="input-container ic2">
-            <textarea id="description" class="input" placeholder=" " value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-            <div class="cut"></div>
-            <label for="description" class="placeholder">Description</label>
+          <div className="input-container ic2">
+            <textarea id="description" className="input" placeholder=" " value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+            <div className="cut"></div>
+            <label for="description" className="placeholder">Description</label>
           </div>
-          <div class="input-container ic2" id="select_form">
-            <select id="recipes" multiple="multiple" placeholder=" " class="input" value={selectedRecipes} onChange={handleRecipeChange}>
+          <div className="input-container ic2" id="select_form">
+            <div id="recipes" className="input">
               {recipes.map((recipe) => (
-                <option type="checkbox" class="item" key={recipe._id} value={recipe._id}>
-                  <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+                <div 
+                  key={recipe._id} 
+                  className={`item ${selectedRecipes.includes(recipe._id) ? 'checked' : ''}`}
+                  onClick={() => handleRecipeClick(recipe._id)}
+                >
+                  <span className="checkbox"><i className="fa-solid fa-check check-icon"></i></span>
                   {recipe.name}
-                </option>
+                </div>
               ))}
-            </select>
-            <div class="cut"></div>
-            <label for="recipes" class="placeholder">Recipes</label>
+            </div>
+            <div className="cut"></div>
+            <label for="recipes" className="placeholder">Recipes</label>
           </div>
-          <div class="buttons">
-            <button type="submit" class="submit">Add Book</button>
-            <button type="button" class="cancel" onClick={() => setShowForm(false)}>Cancel</button>
+          <div className="buttons">
+            <button type="submit" className="submit">Add Book</button>
+            <button type="button" className="cancel" onClick={() => setShowForm(false)}>Cancel</button>
           </div>
         </form>
       )}
