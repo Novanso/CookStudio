@@ -46,6 +46,13 @@ const BookList = () => {
     fetchRecipes();
   }, []);
 
+  const items = document.querySelectorAll(".item")
+  items.forEach(item => {
+    item.addEventListener("click", () => {
+      item.classList.toggle("checked")
+    })
+  })
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -99,6 +106,7 @@ const BookList = () => {
         ))}
       </div>
       <link rel="stylesheet" href="https:\\cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"></link>
+      <script></script>
 
       {showForm && (
         <form onSubmit={handleSubmit} className="book-form">
@@ -117,7 +125,7 @@ const BookList = () => {
               {recipes.map((recipe) => (
                 <option type="checkbox" class="item" key={recipe._id} value={recipe._id}>
                   <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
-                  <label>{recipe.name}</label>
+                  {recipe.name}
                 </option>
               ))}
             </select>
