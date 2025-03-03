@@ -13,7 +13,13 @@
     background-color: #281B1C;
     width: 80%;
     height:100%;
+    margin-right: 5vw;
 }
+
+.react-calendar__month-view__days button:hover {
+    background-color: #281B1C;
+}
+
 .meal-selector {
     margin-top: 20px;
     text-align: center;

@@ -3,6 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './style/Calendar.css'; // Importer le fichier CSS pour les styles
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 
 const FullScreenCalendar = () => {
@@ -10,6 +11,7 @@ const FullScreenCalendar = () => {
   const [meals, setMeals] = useState({});
   const [recipes, setRecipes] = useState([]);
   const mealTypes = ['Lunch', 'Dinner'];
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -65,6 +67,14 @@ const FullScreenCalendar = () => {
     label: recipe.name,
   }));
 
+  const handleViewDetails = (mealType) => {
+    const selectedDate = date.toDateString();
+    const recipeId = meals[selectedDate] && meals[selectedDate][mealType];
+    if (recipeId) {
+      navigate(`/recipes/${recipeId}`);
+    }
+  };
+
   return (
     <div className="fullscreen-calendar">
       <Calendar
@@ -85,6 +95,12 @@ const FullScreenCalendar = () => {
                 placeholder="Select a recipe"
                 isClearable
               />
+              <button
+                onClick={() => handleViewDetails(mealType)}
+                disabled={!meals[date.toDateString()] || !meals[date.toDateString()][mealType]}
+              >
+                View Details
+              </button>
             </div>
           ))}
         </div>
