@@ -1,10 +1,19 @@
 const mongoose = require('mongoose');
 
-const MealSchema = new mongoose.Schema({
-    date: { type: Date, required: true },
-    type: { type: String, enum: ['lunch', 'dinner'], required: true },
-    recipe: { type: mongoose.Schema.Types.ObjectId, ref: 'Recipe', required: true },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+const mealSchema = new mongoose.Schema({
+  date: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  lunch: {
+    type: String,
+    default: '',
+  },
+  dinner: {
+    type: String,
+    default: '',
+  },
 });
 
-module.exports = mongoose.model('Meal', MealSchema);
+module.exports = mongoose.model('meal', mealSchema);

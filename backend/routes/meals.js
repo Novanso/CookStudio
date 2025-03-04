@@ -1,51 +1,42 @@
 const express = require('express');
 const router = express.Router();
 const Meal = require('../models/meal');
-const auth = require('../middleware/auth');
 
-// Create a meal
-router.post('/', auth, async (req, res) => {
-    const { date, type, recipe } = req.body;
-    const newMeal = new Meal({ date, type, recipe, user: req.user.id });
-    try {
-        await newMeal.save();
-        res.status(201).json(newMeal);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+// Route pour récupérer les repas d'un jour spécifique
+router.get('/api/meals/:date', async (req, res) => {
+  try {
+    const meals = await Meal.findOne({ date: req.params.date });
+    if (!meals) {
+      return res.status(404).json({ message: 'No meals found for this date' });
     }
+    res.json(meals);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
-// List all meals for the logged-in user
-router.get('/', auth, async (req, res) => {
-    try {
-        const meals = await Meal.find({ user: req.user.id }).populate('recipe');
-        res.json(meals);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+// Route pour sauvegarder les repas d'un jour spécifique
+router.post('/api/meals/:date', async (req, res) => {
+  try {
+    const { lunch, dinner } = req.body;
+    let meals = await Meal.findOne({ date: req.params.date });
 
-// Update a meal
-router.put('/:id', auth, async (req, res) => {
-    const { id } = req.params;
-    const { date, type, recipe } = req.body;
-    try {
-        const meal = await Meal.findOneAndUpdate({ _id: id, user: req.user.id }, { date, type, recipe }, { new: true }).populate('recipe');
-        res.json(meal);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+    if (meals) {
+      meals.lunch = lunch;
+      meals.dinner = dinner;
+    } else {
+      meals = new Meal({
+        date: req.params.date,
+        lunch,
+        dinner,
+      });
     }
-});
 
-// Delete a meal
-router.delete('/:id', auth, async (req, res) => {
-    const { id } = req.params;
-    try {
-        await Meal.findOneAndDelete({ _id: id, user: req.user.id });
-        res.json({ message: 'Meal deleted' });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+    await meals.save();
+    res.status(201).json(meals);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
 module.exports = router;
