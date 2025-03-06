@@ -11,7 +11,7 @@ const FullScreenCalendar = () => {
   const [meals, setMeals] = useState({});
   const [recipes, setRecipes] = useState([]);
   const navigate = useNavigate();
-  const mealTypes = ['Lunch', 'Dinner'];
+  const mealTypes = ['lunch', 'dinner'];
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -20,7 +20,7 @@ const FullScreenCalendar = () => {
         const config = {
           headers: { Authorization: `Bearer ${token}` },
         };
-        const response = await axios.get('http://localhost:5000/api/recipes/', config);
+        const response = await axios.get('http://localhost:5000/api/recipes', config);
         setRecipes(response.data);
       } catch (error) {
         console.error('Error fetching recipes:', error);
@@ -30,28 +30,16 @@ const FullScreenCalendar = () => {
   }, []);
 
   useEffect(() => {
-    const fetchMeals = async () => {
+    const fetchAllMeals = async () => {
       try {
-        const year = date.getFullYear();
-        const month = ("0" + (date.getMonth() + 1)).slice(-2);
-        const day = ("0" + date.getDate()).slice(-2);
-        const formattedDate = (`${year}-${month}-${day}`);
-        const response = await axios.get(`http://localhost:5000/api/meals/${formattedDate}`);
-        setMeals((prevMeals) => ({
-          ...prevMeals,
-          [formattedDate]: response.data,
-        }));
-        console.log(meals)
+        const response = await axios.get('http://localhost:5000/api/meals');
+        setMeals(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
-        if (error.response && error.response.status === 404) {
-          console.log(`No meals found for ${date.toDateString()}`);
-        } else {
-          console.error('Error fetching meals:', error);
-        }
+        console.error('Error fetching all meals:', error);
       }
     };
-    fetchMeals();
-  }, [date]);
+    fetchAllMeals();
+  }, []);
 
   const handleDateChange = (newDate) => {
     setDate(newDate);
@@ -70,20 +58,18 @@ const FullScreenCalendar = () => {
       },
     };
     setMeals(updatedMeals);
-
     try {
       await axios.post(`http://localhost:5000/api/meals/${formattedDate}`, {
-        lunch: updatedMeals[formattedDate].Lunch,
-        dinner: updatedMeals[formattedDate].Dinner,
+        lunch: updatedMeals[formattedDate].lunch,
+        dinner: updatedMeals[formattedDate].dinner,
       });
     } catch (error) {
-      if (error.response.status === 404) {
-        console.log(`No meals found for ${date.toDateString()}`);
-      }
+      console.error('Error saving meals:', error);
     }
   };
 
   const getRecipeName = (recipeId) => {
+    if (!recipeId) return '-';
     const recipe = recipes.find((r) => r._id === recipeId);
     return recipe ? recipe.name : '-';
   };
@@ -94,12 +80,16 @@ const FullScreenCalendar = () => {
       const month = ("0" + (date.getMonth() + 1)).slice(-2);
       const day = ("0" + date.getDate()).slice(-2);
       const formattedDate = (`${year}-${month}-${day}`);
-      const meal = meals[formattedDate] || {};
+      var meal = {};
+      if(Array.isArray(meals)) {
+        meal = meals.find(meal => meal.date === formattedDate) ||{};
+      }
+      console.log(formattedDate, meal)
       return (
         <div className="tile-content">
           {mealTypes.map((mealType) => (
             <div key={mealType}>
-              {getRecipeName(meal[mealType])}
+              {meal[mealType] ? getRecipeName(meal[mealType]) : '-'}
             </div>
           ))}
         </div>
@@ -117,8 +107,8 @@ const FullScreenCalendar = () => {
     const year = date.getFullYear();
     const month = ("0" + (date.getMonth() + 1)).slice(-2);
     const day = ("0" + date.getDate()).slice(-2);
-    const selectedDate = (`${year}-${month}-${day}`);
-    const recipeId = meals[selectedDate] && meals[selectedDate][mealType];
+    const formattedDate = (`${year}-${month}-${day}`);
+    const recipeId = meals[formattedDate] && meals[formattedDate][mealType];
     if (recipeId) {
       navigate(`/recipes/${recipeId}`);
     }
@@ -138,7 +128,7 @@ const FullScreenCalendar = () => {
             <div key={mealType} className="meal-column">
               <h3>{mealType}</h3>
               <Select
-                value={recipeOptions.find((option) => option.value === (meals[date.toDateString()] && meals[date.toDateString()][mealType]))}
+                value={recipeOptions.find((option) => option.value === (meals[`${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}`] && meals[`${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}`][mealType]))}
                 onChange={(selectedOption) => handleMealChange(selectedOption, mealType)}
                 options={recipeOptions}
                 placeholder="Select a recipe"
@@ -146,7 +136,7 @@ const FullScreenCalendar = () => {
               />
               <button
                 onClick={() => handleViewDetails(mealType)}
-                disabled={!meals[date.toDateString()] || !meals[date.toDateString()][mealType]}
+                disabled={!meals[`${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}`] || !meals[`${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}`][mealType]}
               >
                 View Details
               </button>

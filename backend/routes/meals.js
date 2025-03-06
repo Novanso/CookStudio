@@ -2,6 +2,16 @@ const express = require('express');
 const router = express.Router();
 const Meal = require('../models/meal');
 
+// Route pour récupérer tous les repas
+router.get('/api/meals', async (req, res) => {
+  try {
+    const meals = await Meal.find();
+    res.status(200).json(meals);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching meals', error });
+  }
+});
+
 // Route pour récupérer les repas d'un jour spécifique
 router.get('/api/meals/:date', async (req, res) => {
   try {
