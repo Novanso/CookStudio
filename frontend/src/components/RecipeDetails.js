@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import './style/RecipeDetails.css'
+import './style/RecipeDetails.css';
 
-import EditIcon from '../icons/Edit.svg';
 import DeleteIcon from '../icons/Delete.svg';
 
 const RecipeDetails = () => {
@@ -13,7 +12,7 @@ const RecipeDetails = () => {
   const [instructions, setInstructions] = useState('');
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState('');
-  const [showForm, setShowForm] = useState(false);
+  const [suggestedIngredients, setSuggestedIngredients] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -36,38 +35,51 @@ const RecipeDetails = () => {
       }
     };
 
+    const fetchSuggestedIngredients = async () => {
+      try {
+        const token = localStorage.getItem('authToken');
+        const config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
+        const response = await axios.get('http://localhost:5000/api/ingredients', config);
+        setSuggestedIngredients(response.data);
+      } catch (error) {
+        const errorMessage = error.response && error.response.data ? error.response.data.error : 'Failed to fetch ingredients';
+        setError(errorMessage);
+      }
+    };
+
     fetchRecipeDetails();
+    fetchSuggestedIngredients();
   }, [id]);
 
-  const handleAddIngredient = () => {
-    setIngredients([...ingredients, newIngredient]);
-    setNewIngredient('');
-  };
-
-  const handleDeleteIngredient = (index) => {
-    const newIngredients = ingredients.filter((_, i) => i !== index);
-    setIngredients(newIngredients);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const saveRecipe = async (updatedRecipe) => {
     try {
       const token = localStorage.getItem('authToken');
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };
-      const updatedRecipe = {
-        name,
-        instructions,
-        ingredients,
-      };
       await axios.put(`http://localhost:5000/api/recipes/${id}`, updatedRecipe, config);
-      setRecipe({ ...recipe, ...updatedRecipe });
-      setShowForm(false);
+      setRecipe(updatedRecipe);
     } catch (error) {
       const errorMessage = error.response && error.response.data ? error.response.data.error : 'Failed to update recipe';
       setError(errorMessage);
     }
+  };
+
+  const handleAddIngredient = () => {
+    if (newIngredient.trim() !== '') {
+      const updatedIngredients = [...ingredients, newIngredient];
+      setIngredients(updatedIngredients);
+      setNewIngredient('');
+      saveRecipe({ ...recipe, ingredients: updatedIngredients });
+    }
+  };
+
+  const handleDeleteIngredient = (index) => {
+    const updatedIngredients = ingredients.filter((_, i) => i !== index);
+    setIngredients(updatedIngredients);
+    saveRecipe({ ...recipe, ingredients: updatedIngredients });
   };
 
   const handleDelete = async () => {
@@ -94,40 +106,36 @@ const RecipeDetails = () => {
 
   return (
     <div>
-      <div class="recipeHeader">
+      <div className="recipeHeader">
         <h1>{recipe.name}</h1>
-        <button onClick={() => setShowForm(true)}><img src={EditIcon} alt="Edit" className="edit-icon" /></button>
         <button onClick={handleDelete}><img src={DeleteIcon} alt="Delete" className="delete-icon" /></button>
       </div>
-      <p>{recipe.instructions}</p>
       <h2>Ingredients</h2>
       <ul>
-        {recipe.ingredients}
+        {ingredients.map((ingredient, index) => (
+          <li key={index} className="ingredient-item">
+            {ingredient}
+            <button onClick={() => handleDeleteIngredient(index)}><img src={DeleteIcon} alt="Delete" className="delete-icon" /></button>
+          </li>
+        ))}
       </ul>
-
-      {showForm && (
-        <form onSubmit={handleSubmit} className="recipe-form">
-          <div class="input-container ic1">
-            <input type="text" id="name" class="input" value={name} placeholder=" " onChange={(e) => setName(e.target.value)} required />
-            <div class="cut"></div>
-            <label for="name" class="placeholder">Recipe Name</label>
-          </div>
-          <div class="input-container ic2">
-            <textarea id="instructions" class="input" placeholder=" " value={instructions} onChange={(e) => setInstructions(e.target.value)}></textarea>
-            <div class="cut"></div>
-            <label for="instructions" class="placeholder">Instructions</label>
-          </div>
-          <div class="input-container ic2">
-            <textarea id="ingredients" class="input" placeholder=" " value={ingredients} onChange={(e) => setIngredients(e.target.value)}></textarea>
-            <div class="cut"></div>
-            <label for="ingredients" class="placeholder">Ingredients</label>
-          </div>
-          <div class="buttons">
-            <button type="submit" class="submit">Update Recipe</button>
-            <button type="button" class="cancel" onClick={() => setShowForm(false)}>Cancel</button>
-          </div>
-        </form>
-      )}
+      <div className="add-ingredient">
+        <input
+          type="text"
+          list="suggested-ingredients"
+          value={newIngredient}
+          onChange={(e) => setNewIngredient(e.target.value)}
+          placeholder="Add new ingredient"
+        />
+        <datalist id="suggested-ingredients">
+          {suggestedIngredients.map((ingredient, index) => (
+            <option key={index} value={ingredient} />
+          ))}
+        </datalist>
+        <button onClick={handleAddIngredient}>Add</button>
+      </div>
+      <h2>Instructions</h2>
+      <p>{recipe.instructions}</p>
     </div>
   );
 };

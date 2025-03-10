@@ -46,27 +46,32 @@ const FullScreenCalendar = () => {
   };
 
   const handleMealChange = async (selectedOption, mealType) => {
-    const year = date.getFullYear();
-    const month = ("0" + (date.getMonth() + 1)).slice(-2);
-    const day = ("0" + date.getDate()).slice(-2);
-    const formattedDate = (`${year}-${month}-${day}`);
-    const updatedMeals = {
-      ...meals,
-      [formattedDate]: {
-        ...meals[formattedDate],
-        [mealType]: selectedOption ? selectedOption.value : '',
-      },
-    };
-    setMeals(updatedMeals);
-    try {
-      await axios.post(`http://localhost:5000/api/meals/${formattedDate}`, {
-        lunch: updatedMeals[formattedDate].lunch,
-        dinner: updatedMeals[formattedDate].dinner,
-      });
-    } catch (error) {
-      console.error('Error saving meals:', error);
-    }
+  const year = date.getFullYear();
+  const month = ("0" + (date.getMonth() + 1)).slice(-2);
+  const day = ("0" + date.getDate()).slice(-2);
+  const formattedDate = (`${year}-${month}-${day}`);
+  const updatedMeals = {
+    ...meals,
+    [formattedDate]: {
+      ...meals[formattedDate],
+      [mealType]: selectedOption ? selectedOption.value : '',
+    },
   };
+  setMeals(updatedMeals);
+  try {
+    const response = await axios.post(`http://localhost:5000/api/meals/${formattedDate}`, {
+      lunch: updatedMeals[formattedDate].lunch,
+      dinner: updatedMeals[formattedDate].dinner,
+    });
+    // Mettre à jour l'état des repas avec la réponse du serveur
+    setMeals(prevMeals => ({
+      ...prevMeals,
+      [formattedDate]: response.data
+    }));
+  } catch (error) {
+    console.error('Error saving meals:', error);
+  }
+};
 
   const getRecipeName = (recipeId) => {
     if (!recipeId) return '-';
@@ -84,7 +89,6 @@ const FullScreenCalendar = () => {
       if(Array.isArray(meals)) {
         meal = meals.find(meal => meal.date === formattedDate) ||{};
       }
-      console.log(formattedDate, meal)
       return (
         <div className="tile-content">
           {mealTypes.map((mealType) => (
@@ -102,6 +106,20 @@ const FullScreenCalendar = () => {
     value: recipe._id,
     label: recipe.name,
   }));
+
+  const getRecipe = (mealType) => {
+    const year = date.getFullYear();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const day = ("0" + date.getDate()).slice(-2);
+    const formattedDate = (`${year}-${month}-${day}`);
+    var meal = {};
+    if(Array.isArray(meals)) {
+      meal = meals.find(meal => meal.date === formattedDate) ||{};
+    }
+    const meal_recipe = meal[mealType];
+    const true_recipe = recipeOptions.find((option) => option.value === meal_recipe);
+    return true_recipe;
+  };
 
   const handleViewDetails = (mealType) => {
     const year = date.getFullYear();
@@ -128,7 +146,8 @@ const FullScreenCalendar = () => {
             <div key={mealType} className="meal-column">
               <h3>{mealType}</h3>
               <Select
-                value={recipeOptions.find((option) => option.value === (meals[`${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}`] && meals[`${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}`][mealType]))}
+                // value={recipeOptions.find((option) => option.value === (meals.find(meal => meal.date === `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}`)))}
+                value = {() => getRecipe(mealType)}
                 onChange={(selectedOption) => handleMealChange(selectedOption, mealType)}
                 options={recipeOptions}
                 placeholder="Select a recipe"

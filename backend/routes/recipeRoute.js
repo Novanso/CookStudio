@@ -34,7 +34,7 @@ router.post('/api/recipes', auth, async (req, res) => {
     name,
     ingredients,
     instructions,
-    user: req.user.userId
+    user: req.user.userId,
   });
   try {
     await newRecipe.save();
@@ -70,6 +70,20 @@ router.delete('/api/recipes/:id', auth, async (req, res) => {
       return res.status(404).send({ error: 'Recipe not found' });
     }
     res.send({ message: 'Recipe deleted' });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// Get all ingredients
+router.get('/api/ingredients', auth, async (req, res) => {
+  try {
+    const recipes = await Recipe.find({ user: req.user.userId });
+    const ingredientsSet = new Set();
+    recipes.forEach(recipe => {
+      recipe.ingredients.forEach(ingredient => ingredientsSet.add(ingredient));
+    });
+    res.send(Array.from(ingredientsSet));
   } catch (error) {
     res.status(500).send(error);
   }
