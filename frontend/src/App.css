@@ -115,9 +115,24 @@ body {
   height: 1.2em;
 }
 
-.auth-buttons {
+.auth-section {
   display: flex;
   align-items: center;
+}
+
+.profile-picture{
+  width: 2em;
+  height: 2em;
+}
+
+.user-account{
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  width: 9em;
+  padding: 7px;
+  background-color: #594041;
+  border-radius: 5px;
 }
 
 .settings-btn img {

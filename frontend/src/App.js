@@ -24,6 +24,7 @@ import SettingsIcon from './icons/Settings.svg'
 function App() {
   const [authToken, setAuthToken] = useState(null);
   const [username, setUsername] = useState('');
+  const [profilePicture, setProfilePicture] = useState('');
   const [pageTitle, setPageTitle] = useState('Tools');
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const navigate = useNavigate();
@@ -66,6 +67,24 @@ function App() {
         setPageTitle('');
     }
   }, [location.pathname]);
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      if (authToken) {
+        try {
+          const response = await fetch('http://localhost:5000/api/users/me', {
+            headers: { Authorization: `Bearer ${authToken}` },
+          });
+          const data = await response.json();
+          setProfilePicture(data.profilePicture || '');
+        } catch (error) {
+          console.error('Failed to fetch user profile:', error);
+        }
+      }
+    };
+
+    fetchUserProfile();
+  }, [authToken]);
 
   const handleLogin = (token, user) => {
     localStorage.setItem('authToken', token);
@@ -117,10 +136,13 @@ function App() {
             <button onClick={goForward}><img src={NextIcon} alt="Next" className="nav-icon" /></button>
           </div>
           <h1>{pageTitle}</h1>
-          <div className="auth-buttons">
+          <div className="auth-section">
             {authToken ? (
               <>
+              <div className='user-account'>
+                {profilePicture && <img src={profilePicture} alt="Profile" className="profile-picture" />}
                 <span>{username}</span>
+              </div>
                 <button onClick={handleSettings} className="settings-btn">
                   <img src={SettingsIcon} alt="Settings" className="nav-icon" />
                 </button>

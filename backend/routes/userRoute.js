@@ -2,6 +2,20 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const auth = require('../middleware/auth');
+const multer = require('multer');
+const path = require('path');
+
+// Configure multer for image upload
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, '../../frontend/public/profiles'));
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${req.user.userId}-${Date.now()}${path.extname(file.originalname)}`);
+  },
+});
+
+const upload = multer({ storage });
 
 // Get user profile
 router.get('/api/users/me', auth, async (req, res) => {
@@ -17,8 +31,8 @@ router.get('/api/users/me', auth, async (req, res) => {
 });
 
 // Update user profile
-router.put('/api/users/me', auth, async (req, res) => {
-  const { username, profilePicture, displayLanguage } = req.body;
+router.put('/api/users/me', auth, upload.single('profilePicture'), async (req, res) => {
+  const { username, displayLanguage } = req.body;
 
   try {
     const user = await User.findById(req.user.userId);
@@ -29,11 +43,11 @@ router.put('/api/users/me', auth, async (req, res) => {
     if (username) {
       user.username = username;
     }
-    if (profilePicture) {
-      user.profilePicture = profilePicture;
-    }
     if (displayLanguage) {
       user.displayLanguage = displayLanguage;
+    }
+    if (req.file) {
+      user.profilePicture = `/profiles/${req.file.filename}`;
     }
 
     await user.save();

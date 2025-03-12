@@ -10,6 +10,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  profilePicture: {
+    type: String,
+    required: false, // Not required on creation
+  },
+  displayLanguage: {
+    type: String,
+    required: false, // Not required on creation
+  },
 });
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);

@@ -40,3 +40,8 @@
   .save-btn:hover {
     background-color: #0056b3;
   }
+
+.profile-picture-preview img {
+  width: 15%;
+  height: 15%;
+}
