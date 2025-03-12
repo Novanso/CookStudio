@@ -6,12 +6,12 @@ import BookList from './components/BookList';
 import Calendar from './components/Calendar';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
-
 import BookDetails from './components/BookDetails';
 import RecipeDetails from './components/RecipeDetails';
+import Settings from './components/Settings';
 import './App.css';
 
-// Importer les icônes
+// Icons
 import HomeIcon from './icons/Home.svg';
 import RecipesIcon from './icons/Recipe.svg';
 import BooksIcon from './icons/Library.svg';
@@ -19,12 +19,13 @@ import CalendarIcon from './icons/Calendar.svg';
 import LogoutIcon from './icons/Logout.svg';
 import NextIcon from './icons/Next.svg';
 import BackIcon from './icons/Back.svg';
+import SettingsIcon from './icons/Settings.svg'
 
 function App() {
   const [authToken, setAuthToken] = useState(null);
   const [username, setUsername] = useState('');
-  const [pageTitle, setPageTitle] = useState('Tools'); // State pour le titre de la page
-  const [isNavCollapsed, setIsNavCollapsed] = useState(true); // State pour gérer la rétraction de la barre de navigation
+  const [pageTitle, setPageTitle] = useState('Tools');
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -39,7 +40,6 @@ function App() {
   }, [navigate, location.pathname]);
 
   useEffect(() => {
-    // Définir le titre de la page en fonction du chemin actuel
     switch (location.pathname) {
       case '/':
         setPageTitle('Home');
@@ -83,6 +83,10 @@ function App() {
     navigate('/login');
   };
 
+  const handleSettings = () => {
+    navigate('/settings');
+  };
+
   const goBack = () => {
     navigate(-1);
   };
@@ -112,11 +116,14 @@ function App() {
             <button onClick={goBack}><img src={BackIcon} alt="Back" className="nav-icon" /></button>
             <button onClick={goForward}><img src={NextIcon} alt="Next" className="nav-icon" /></button>
           </div>
-          <h1>{pageTitle}</h1> {/* Afficher dynamiquement le titre de la page */}
+          <h1>{pageTitle}</h1>
           <div className="auth-buttons">
             {authToken ? (
               <>
                 <span>{username}</span>
+                <button onClick={handleSettings} className="settings-btn">
+                  <img src={SettingsIcon} alt="Settings" className="nav-icon" />
+                </button>
                 <button onClick={handleLogout} className="logout-btn">
                   <img src={LogoutIcon} alt="Logout" className="logout-icon" />
                 </button>
@@ -139,6 +146,7 @@ function App() {
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/books/:id" element={<BookDetails />} />
             <Route path="/recipes/:id" element={<RecipeDetails />} />
+            <Route path="/settings" element={<Settings authToken={authToken} />} />
           </Routes>
         </div>
       </div>

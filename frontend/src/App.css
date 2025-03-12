@@ -56,6 +56,11 @@ body {
   height: 0.8em;
 }
 
+.auth-buttons a img {
+  width: 1.5em;
+  height: 1.5em;
+}
+
 .vertical-nav .collapse-btn {
   background: none;
   border: none;
@@ -115,14 +120,19 @@ body {
   align-items: center;
 }
 
-.auth-buttons span {
-  margin-right: 10px;
+.settings-btn img {
+  width: 1.8em;
+  height: 1.8em;
 }
 
 .logout-btn {
   background: none;
 }
 
+.logout-btn img {
+  width: 1.8em;
+  height: 1.8em;
+}
 /**  ======== MAIN CONTENT ======== **/
 
 .content {

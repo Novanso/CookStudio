@@ -6,8 +6,6 @@ import './style/RecipeList.css'; // Importer le fichier CSS pour les styles
 const RecipeList = () => {
   const [recipes, setRecipes] = useState([]);
   const [recipeName, setRecipeName] = useState('');
-  const [ingredients, setIngredients] = useState('');
-  const [instructions, setInstructions] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -40,14 +38,12 @@ const RecipeList = () => {
       };
       const newRecipe = {
         name: recipeName,
-        ingredients: ingredients.split(',').map(ingredient => ingredient.trim()), // Convert comma-separated string to array
-        instructions,
+        ingredients: [], // Empty ingredients list
+        instructions: '', // Empty instructions
       };
       await axios.post('http://localhost:5000/api/recipes', newRecipe, config);
       setSuccess('Recipe added successfully');
       setRecipeName('');
-      setIngredients('');
-      setInstructions('');
       setError(null);
       setShowForm(false);
       // Refresh the recipe list
@@ -81,25 +77,12 @@ const RecipeList = () => {
 
       {showForm && (
         <form onSubmit={handleSubmit} className="recipe-form">
-          <div class="input-container ic1">
-            <input id="name" class="input" type="text" placeholder=" " value={recipeName} onChange={(e) => setRecipeName(e.target.value)} required/>
-            <div class="cut"></div>
-            <label for="name" class="placeholder">Recipe Name</label>
+          <div className="input-container ic1">
+            <input id="name" className="input" type="text" placeholder=" " value={recipeName} onChange={(e) => setRecipeName(e.target.value)} required />
+            <div className="cut"></div>
+            <label htmlFor="name" className="placeholder">Recipe Name</label>
           </div>
-          <div class="input-container ic2">
-            <input id="ingredients" class="input" type="text" placeholder=" " value={ingredients} onChange={(e) => setIngredients(e.target.value)} required/>
-            <div class="cut"></div>
-            <label for="ingredients" class="placeholder">Ingredients :</label>
-          </div>
-          <div class="input-container ic2">
-            <textarea id="name" class="input" type="text" placeholder=" " value={instructions} onChange={(e) => setInstructions(e.target.value)} required></textarea>
-            <div class="cut"></div>
-            <label for="instructions" class="placeholder">Instructions:</label>
-          </div>
-          <div class="buttons">
-            <button type="submit" class="submit">Add Recipe</button>
-            <button type="button"class="cancel" onClick={() => setShowForm(false)}>Cancel</button>
-          </div>
+            <button type="submit" className="submit">Continue</button>
         </form>
       )}
     </div>

@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import './style/RecipeDetails.css';
 
 import DeleteIcon from '../icons/Delete.svg';
+import AddIcon from '../icons/Add.svg';
 
 const RecipeDetails = () => {
   const { id } = useParams();
@@ -96,6 +97,12 @@ const RecipeDetails = () => {
     }
   };
 
+  const handleTitleChange = (e) => {
+    const updatedName = e.target.innerText;
+    setName(updatedName);
+    saveRecipe({ ...recipe, name: updatedName });
+  };
+
   if (error) {
     return <p style={{ color: 'red' }}>{error}</p>;
   }
@@ -107,9 +114,9 @@ const RecipeDetails = () => {
   return (
     <div>
       <div className="recipeHeader">
-        <h1>{recipe.name}</h1>
-        <button onClick={handleDelete}><img src={DeleteIcon} alt="Delete" className="delete-icon" /></button>
+        <cite contentEditable="true" onBlur={handleTitleChange} suppressContentEditableWarning={true}><h1>{name}</h1></cite>
       </div>
+      <p>{recipe.instructions}</p>
       <h2>Ingredients</h2>
       <ul>
         {ingredients.map((ingredient, index) => (
@@ -132,10 +139,9 @@ const RecipeDetails = () => {
             <option key={index} value={ingredient} />
           ))}
         </datalist>
-        <button onClick={handleAddIngredient}>Add</button>
+        <button onClick={handleAddIngredient}><img src={AddIcon} alt="Add" className="delete-icon" /></button>
       </div>
-      <h2>Instructions</h2>
-      <p>{recipe.instructions}</p>
+      <button onClick={handleDelete} className='delete-button'>Delete Recipe</button>
     </div>
   );
 };

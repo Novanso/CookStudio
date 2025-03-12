@@ -25,18 +25,14 @@
 .recipe-form {
   margin-top: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
-  width: 60%;
+  width: 100%;
 }
 
 .recipe-form div {
   display: flex;
   flex-direction: column;
-}
-
-.recipe-form button {
-  width: 10vw;
 }
 
 body {
@@ -141,7 +137,7 @@ body {
   justify-content: space-evenly;
 }
 
-.submit {
+.recipe-form button {
   background-color: #08d;
   border-radius: 12px;
   border: 0;
@@ -152,23 +148,9 @@ body {
   height: 50px;
   margin-top: 38px;
   text-align: center;
-  width: 100%;
+  width: 20%;
 }
 
 .submit:active {
   background-color: #06b;
-}
-
-.cancel {
-  background-color: rgb(221, 0, 0);
-  border-radius: 12px;
-  border: 0;
-  box-sizing: border-box;
-  color: #eee;
-  cursor: pointer;
-  font-size: 18px;
-  height: 50px;
-  margin-top: 38px;
-  text-align: center;
-  width: 100%;
 }

@@ -50,7 +50,7 @@ router.put('/api/recipes/:id', auth, async (req, res) => {
   const { name, ingredients, instructions } = req.body;
 
   try {
-    const recipe = await Recipe.findByIdAndUpdate(id, { name, ingredients, instructions }, { new: true });
+    const recipe = await Recipe.findByIdAndUpdate(id, { name, ingredients, instructions }, { new: true }).populate('ingredients.ingredient');
     if (!recipe) {
       return res.status(404).send({ error: 'Recipe not found' });
     }
@@ -70,20 +70,6 @@ router.delete('/api/recipes/:id', auth, async (req, res) => {
       return res.status(404).send({ error: 'Recipe not found' });
     }
     res.send({ message: 'Recipe deleted' });
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
-// Get all ingredients
-router.get('/api/ingredients', auth, async (req, res) => {
-  try {
-    const recipes = await Recipe.find({ user: req.user.userId });
-    const ingredientsSet = new Set();
-    recipes.forEach(recipe => {
-      recipe.ingredients.forEach(ingredient => ingredientsSet.add(ingredient));
-    });
-    res.send(Array.from(ingredientsSet));
   } catch (error) {
     res.status(500).send(error);
   }

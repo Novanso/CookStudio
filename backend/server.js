@@ -5,6 +5,8 @@ const recipeRoute = require('./routes/recipeRoute');
 const bookRoute = require('./routes/bookRoute');
 const authRoute = require('./routes/auth');
 const mealsRoute = require('./routes/meals');
+const ingredientRoute = require('./routes/ingredientRoute');
+const userRoute = require('./routes/userRoute');
 require('dotenv').config(); // Charger le module dotenv
 
 const app = express();
@@ -20,6 +22,8 @@ app.use(express.json());
 app.use(recipeRoute);
 app.use(bookRoute);
 app.use(mealsRoute)
+app.use(userRoute)
+app.use(ingredientRoute)
 app.use('/api/auth', authRoute); // Utiliser les routes d'authentification
 
 mongoose.connect(process.env.MONGODB_URL);
