@@ -123,16 +123,31 @@ body {
 .profile-picture{
   width: 2em;
   height: 2em;
+  border: 2px solid;
+  border-color: #D8C7C7;
+  border-radius: 3px;
 }
 
 .user-account{
   display: flex;
   align-items: center;
   gap: 0.8em;
-  width: 9em;
+  width: 12em;
+  height: 2em;
   padding: 7px;
   background-color: #594041;
   border-radius: 5px;
+}
+
+.user-account button {
+  margin-left: auto;
+  padding:0px
+}
+
+.user-account span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .settings-btn img {
@@ -154,6 +169,9 @@ body {
   flex: 1;
   padding: 3em 4em;
   border-radius: 2em 0% 0% 0%;
+  border-left: 4px solid;
+  border-top: 4px solid;
+  border-color: #5E4042;
   background-color: #281B1C;
 }
 

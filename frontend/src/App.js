@@ -20,6 +20,7 @@ import LogoutIcon from './icons/Logout.svg';
 import NextIcon from './icons/Next.svg';
 import BackIcon from './icons/Back.svg';
 import SettingsIcon from './icons/Settings.svg'
+import SelectIcon from './icons/Select.svg'
 
 function App() {
   const [authToken, setAuthToken] = useState(null);
@@ -139,13 +140,16 @@ function App() {
           <div className="auth-section">
             {authToken ? (
               <>
-              <div className='user-account'>
-                {profilePicture && <img src={profilePicture} alt="Profile" className="profile-picture" />}
-                <span>{username}</span>
-              </div>
                 <button onClick={handleSettings} className="settings-btn">
                   <img src={SettingsIcon} alt="Settings" className="nav-icon" />
                 </button>
+                <div className='user-account'>
+                  {profilePicture && <img src={profilePicture} alt="Profile" className="profile-picture" />}
+                  <span>{username}</span>
+                  <button className="settings-btn">
+                    <img src={SelectIcon} alt="Select" className="nav-icon" />
+                  </button>
+                </div>
                 <button onClick={handleLogout} className="logout-btn">
                   <img src={LogoutIcon} alt="Logout" className="logout-icon" />
                 </button>
