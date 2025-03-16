@@ -5,6 +5,7 @@ import App from './App';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+window.parent.document.title = 'CookStudio';
 root.render(
   <React.StrictMode>
     <BrowserRouter>

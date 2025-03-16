@@ -1,47 +1,78 @@
 .settings-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .settings-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .input-container {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  
-  .input-container label {
-    font-weight: bold;
-  }
-  
-  .input-container input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .save-btn {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .save-btn:hover {
-    background-color: #0056b3;
-  }
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-.profile-picture-preview img {
-  width: 15%;
-  height: 15%;
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.user {
+  display: flex;
+  gap: 2em;
+  margin-bottom: 3em;
+}
+
+.user h1 {
+  margin-top: 1em;
+}
+
+.profile-pic {
+  border-radius: 10px;
+  height: 100px;
+  width: 100px;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  vertical-align: middle;
+  text-align: center;
+  color: transparent;
+  transition: all .3s ease;
+  text-decoration: none;
+  cursor: pointer;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.profile-pic:hover {
+  background-color: rgba(0,0,0,.5);
+  z-index: 10000;
+  color: #fff;
+  transition: all .3s ease;
+  text-decoration: none;
+}
+
+.pfp-edit input[type="file"] {
+  display: none;
+  cursor: pointer;
+}
+
+
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.input-container label {
+  font-weight: bold;
+}
+
+.save-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background-color: #0056b3;
 }

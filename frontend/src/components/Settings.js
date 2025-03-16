@@ -26,13 +26,10 @@ const Settings = ({ authToken }) => {
     fetchUser();
   }, [authToken]);
 
-  const handleSave = async (e) => {
-    e.preventDefault();
+  const handleProfilePictureChange = async (e) => {
+    const file = e.target.files[0];
     const formData = new FormData();
-    formData.append('displayLanguage', displayLanguage);
-    if (profilePicture) {
-      formData.append('profilePicture', profilePicture);
-    }
+    formData.append('profilePicture', file);
 
     try {
       const config = {
@@ -43,44 +40,51 @@ const Settings = ({ authToken }) => {
       };
       const response = await axios.put('http://localhost:5000/api/users/me', formData, config);
       setUser(response.data);
-      setSuccess('Settings updated successfully');
+      setSuccess('Profile picture updated successfully');
       setError(null);
     } catch (error) {
-      setError('Failed to update settings');
+      setError('Failed to update profile picture');
       setSuccess(null);
     }
   };
 
   return (
     <div className="settings-container">
-      {user && user.profilePicture && (
-        <div className="profile-picture-preview">
-          <img src={user.profilePicture} alt="Profile" />
-        </div>
-      )}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>{success}</p>}
-      <form onSubmit={handleSave} className="settings-form">
-        <div className="input-container">
-          <label htmlFor="profilePicture">Profile Picture</label>
-          <input
-            id="profilePicture"
-            type="file"
-            accept="image/*"
-            onChange={(e) => setProfilePicture(e.target.files[0])}
-          />
-        </div>
-        <div className="input-container">
+      {user && (
+        <div className='user'>
+          {user.profilePicture && (
+            <div className="pfp-edit">
+              <label htmlFor="profilePicture">
+                <div class="profile-pic" style={{backgroundImage: 'url(http://localhost:3000/' + user.profilePicture}}>
+                  <span>Change Image</span>
+                </div>
+              </label>
+              <input type="File" accept="image/*" name="profilePicture" id="profilePicture" onChange={handleProfilePictureChange}></input>
+            </div>
+          )}
+          {!user.profilePicture && (
+            <div className="pfp-edit">
+              <label htmlFor="profilePicture">
+                <div class="profile-pic" style={{backgroundImage: 'url(http://localhost:3000/'}}>
+                  <span>Change Image</span>
+                </div>
+              </label>
+              <input type="File" name="profilePicture" id="profilePicture" onChange={handleProfilePictureChange}></input>
+            </div>
+          )}
+          <h1>{ user.username }</h1>
+        </div> 
+      )}
+      <div className="input-container">
           <label htmlFor="displayLanguage">Display Language</label>
-          <input
-            id="displayLanguage"
-            type="text"
-            value={displayLanguage}
-            onChange={(e) => setDisplayLanguage(e.target.value)}
-          />
+          <select id="displayLanguage" value={displayLanguage} onChange={(e) => setDisplayLanguage(e.target.value)}>
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="it">Italiano</option>
+          </select>
         </div>
-        <button type="submit" className="save-btn">Save</button>
-      </form>
     </div>
   );
 };
