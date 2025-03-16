@@ -22,4 +22,5 @@ export const LanguageProvider = ({ children }) => {
   );
 };
 
+export { LanguageContext };
 export default LanguageContext;

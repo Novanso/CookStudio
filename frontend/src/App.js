@@ -31,7 +31,6 @@ function App() {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-  const { texts } = useContext(LanguageContext); 
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -123,10 +122,10 @@ function App() {
         <div className="vertical-nav">
           <img src={isNavCollapsed ? "https://i.imgur.com/PdseOyn.png" : "https://i.imgur.com/YLp3k38.png"} alt="Logo" className="Main_Logo" />
           <ul>
-            <li title="Home"><Link to="/"><img src={HomeIcon} alt="Home" className="nav-icon" />{!isNavCollapsed && ` ${texts.home}`}</Link></li>
-            <li title="Recipes"><Link to="/recipes"><img src={RecipesIcon} alt="Recipes" className="nav-icon" />{!isNavCollapsed && ` ${texts.recipes}`}</Link></li>
-            <li title="Books"><Link to="/books"><img src={BooksIcon} alt="Books" className="nav-icon" />{!isNavCollapsed && ` ${texts.book}`}</Link></li>
-            <li title="Calendar"><Link to="/calendar"><img src={CalendarIcon} alt="Calendar" className="nav-icon" />{!isNavCollapsed && ` ${texts.calendar}`}</Link></li>
+            <li title="Home"><Link to="/"><img src={HomeIcon} alt="Home" className="nav-icon" />{!isNavCollapsed && 'Home'}</Link></li>
+            <li title="Recipes"><Link to="/recipes"><img src={RecipesIcon} alt="Recipes" className="nav-icon" />{!isNavCollapsed && 'Recipes'}</Link></li>
+            <li title="Books"><Link to="/books"><img src={BooksIcon} alt="Books" className="nav-icon" />{!isNavCollapsed && 'Books'}</Link></li>
+            <li title="Calendar"><Link to="/calendar"><img src={CalendarIcon} alt="Calendar" className="nav-icon" />{!isNavCollapsed && 'Calendar'}</Link></li>
           </ul>
         </div>
         <div className="main-content">
