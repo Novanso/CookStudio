@@ -1,0 +1,20 @@
+{
+    "home": "Home",
+    "recipes": "Recipes",
+    "books": "Books",
+    "calendar": "Calendar",
+    "settings": "Settings",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "profilePicture": "Profile Picture",
+    "displayLanguage": "Display Language",
+    "save": "Save",
+    "failedFetchUserData": "Failed to fetch user data",
+    "settingsUpdatedSuccessfully": "Settings updated successfully",
+    "failedUpdateSettings": "Failed to update settings",
+    "profilePictureUpdatedSuccessfully": "Profile picture updated successfully",
+    "failedUpdateProfilePicture": "Failed to update profile picture",
+    "displayLanguageUpdatedSuccessfully": "Display language updated successfully",
+    "failedUpdateDisplayLanguage": "Failed to update display language"
+  }

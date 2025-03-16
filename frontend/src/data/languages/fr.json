@@ -1,0 +1,20 @@
+{
+    "home": "Accueil",
+    "recipes": "Recettes",
+    "books": "Livres",
+    "calendar": "Calendrier",
+    "settings": "Paramètres",
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion",
+    "profilePicture": "Photo de profil",
+    "displayLanguage": "Langue d'affichage",
+    "save": "Enregistrer",
+    "failedFetchUserData": "Échec de la récupération des données utilisateur",
+    "settingsUpdatedSuccessfully": "Paramètres mis à jour avec succès",
+    "failedUpdateSettings": "Échec de la mise à jour des paramètres",
+    "profilePictureUpdatedSuccessfully": "Photo de profil mise à jour avec succès",
+    "failedUpdateProfilePicture": "Échec de la mise à jour de la photo de profil",
+    "displayLanguageUpdatedSuccessfully": "Langue d'affichage mise à jour avec succès",
+    "failedUpdateDisplayLanguage": "Échec de la mise à jour de la langue d'affichage"
+  }

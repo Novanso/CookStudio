@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import LanguageContext from '../context/LanguageContext';
 import './style/Settings.css';
 
 const Settings = ({ authToken }) => {
   const [user, setUser] = useState(null);
   const [profilePicture, setProfilePicture] = useState(null);
   const [displayLanguage, setDisplayLanguage] = useState('');
+  const { texts, changeLanguage, languages, language } = useContext(LanguageContext);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
 
@@ -17,7 +19,9 @@ const Settings = ({ authToken }) => {
         };
         const response = await axios.get('http://localhost:5000/api/users/me', config);
         setUser(response.data);
-        setDisplayLanguage(response.data.displayLanguage || '');
+        if (response.data.displayLanguage) {
+          changeLanguage(response.data.displayLanguage);
+        }
       } catch (error) {
         setError('Failed to fetch user data');
       }
@@ -44,6 +48,26 @@ const Settings = ({ authToken }) => {
       setError(null);
     } catch (error) {
       setError('Failed to update profile picture');
+      setSuccess(null);
+    }
+  };
+
+  const handleLanguageChange = async (e) => {
+    const newLanguage = e.target.value;
+    changeLanguage(newLanguage);
+    setDisplayLanguage(newLanguage);
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${authToken}` },
+      };
+      const updatedUser = { displayLanguage: newLanguage };
+      const response = await axios.put('http://localhost:5000/api/users/me', updatedUser, config);
+      setUser(response.data);
+      setDisplayLanguage(newLanguage);
+      setSuccess('Display language updated successfully');
+      setError(null);
+    } catch (error) {
+      setError('Failed to update display language');
       setSuccess(null);
     }
   };
@@ -78,12 +102,18 @@ const Settings = ({ authToken }) => {
         </div> 
       )}
       <div className="input-container">
-          <label htmlFor="displayLanguage">Display Language</label>
-          <select id="displayLanguage" value={displayLanguage} onChange={(e) => setDisplayLanguage(e.target.value)}>
-            <option value="en">English</option>
-            <option value="fr">French</option>
-            <option value="it">Italiano</option>
-          </select>
+        <label htmlFor="displayLanguage" name="selector">{texts.displayLanguage}</label>
+        <select
+          id="displayLanguage"
+          value={language}
+          onChange={handleLanguageChange}
+        >
+          {Object.keys(languages).map((lang) => (
+            <option key={lang} value={lang}>
+              {languages[lang].name}
+            </option>
+          ))}
+        </select>
         </div>
     </div>
   );
