@@ -52,8 +52,6 @@
   cursor: pointer;
 }
 
-
-
 .input-container {
   display: flex;
   flex-direction: column;
@@ -75,4 +73,42 @@
 
 .save-btn:hover {
   background-color: #0056b3;
+}
+
+:root {
+  --background-gradient: linear-gradient(178deg, #ffff33 10%, #3333ff);
+  --gray: #34495e;
+  --darkgray: #2c3e50;
+}
+
+select {
+  appearance: none;
+  outline: 10px red;
+  border: 0;
+  box-shadow: none;
+  flex: 1;
+  padding: 0 1em;
+  color: #fff;
+  border-radius: .25em;
+  background-color: var(--darkgray);
+  background-image: none;
+  cursor: pointer;
+}
+
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  border-radius: .25em;
+  overflow: hidden;
+}
+
+.select a {
+  font-weight: bold;
+  color: var(--gray);
+  text-decoration: drop-shadow;
+  padding: .25em;
+  border-radius: .50em;
+  background: pink;
 }

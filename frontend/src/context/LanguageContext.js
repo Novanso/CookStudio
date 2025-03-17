@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import languages from '../data/languages';
 
-const LanguageContext = createContext();
+
+export const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState('en');
@@ -22,5 +23,4 @@ export const LanguageProvider = ({ children }) => {
   );
 };
 
-export { LanguageContext };
-export default LanguageContext;
+export default LanguageProvider;
