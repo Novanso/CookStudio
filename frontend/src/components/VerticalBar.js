@@ -14,9 +14,9 @@ const VerticalBar = ({ authToken }) => {
           <img src="https://i.imgur.com/PdseOyn.png" alt="Logo" className="Main_Logo" />
           <ul>
             <li title={texts.home}><Link to="/"><img src={HomeIcon} alt="Home" className="nav-icon" /></Link></li>
-            <li title={texts.recipes}><Link to="/recipes"><img src={RecipesIcon} alt="Recipes" className="nav-icon" /></Link></li>
-            <li title={texts.books}><Link to="/books"><img src={BooksIcon} alt="Books" className="nav-icon" /></Link></li>
-            <li title={texts.calendar}><Link to="/calendar"><img src={CalendarIcon} alt="Calendar" className="nav-icon" /></Link></li>
+            <li title={texts.recipes}><Link to="/recipes"><img src={RecipesIcon} alt={texts.recipes} className="nav-icon" /></Link></li>
+            <li title={texts.books}><Link to="/books"><img src={BooksIcon} alt={texts.books} className="nav-icon" /></Link></li>
+            <li title={texts.calendar}><Link to="/calendar"><img src={CalendarIcon} alt={texts.calendar} className="nav-icon" /></Link></li>
           </ul>
         </div>
     )

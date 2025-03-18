@@ -48,18 +48,6 @@ padding: 4px 20px 0;
 width: 100%;
 }
 
-.cut {
-  background-color: #281B1C;
-  border-radius: 10px;
-  height: 20px;
-  left: 20px;
-  position: absolute;
-  top: -20px;
-  transform: translateY(0);
-  transition: transform 200ms;
-  width: 100px;
-}
-
 .cut-short {
 width: 50px;
 }

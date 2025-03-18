@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { LanguageContext } from '../context/LanguageContext';
 import axios from 'axios';
 import './style/Login_Register_Form.css'
 
@@ -6,6 +7,7 @@ const LoginForm = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const { texts } = useContext(LanguageContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,19 +27,19 @@ const LoginForm = ({ onLogin }) => {
       <form onSubmit={handleSubmit} id="Login">
         <input
           type="text"
-          placeholder="Username"
+          placeholder={texts.username}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder={texts.password}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit">{texts.login}</button>
       </form>
     </div>
   );

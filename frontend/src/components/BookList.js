@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { LanguageContext } from '../context/LanguageContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './style/BookList.css'; // Importer le fichier CSS pour les styles
@@ -13,6 +14,7 @@ const BookList = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
+  const { texts } = useContext(LanguageContext);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -65,7 +67,6 @@ const BookList = () => {
       setSelectedRecipes([]);
       setError(null);
       setShowForm(false);
-      // Refresh the book list
       const response = await axios.get('http://localhost:5000/api/books', config);
       setBooks(response.data);
     } catch (error) {
@@ -95,7 +96,7 @@ const BookList = () => {
       {success && <p style={{ color: 'green' }}>{success}</p>}
       <div className="book-grid">
         <div className="book-card add-book-card" onClick={() => setShowForm(true)}>
-          <p>Add Book</p>
+          <p>{ texts.addBook }</p>
         </div>
         {books.map((book) => (
           <div className="book-card" key={book._id} onClick={() => handleCardClick(book._id)}>

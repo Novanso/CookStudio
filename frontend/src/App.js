@@ -16,10 +16,6 @@ import Settings from './components/Settings';
 import './App.css';
 
 // Icons
-import HomeIcon from './icons/Home.svg';
-import RecipesIcon from './icons/Recipe.svg';
-import BooksIcon from './icons/Library.svg';
-import CalendarIcon from './icons/Calendar.svg';
 import LogoutIcon from './icons/Logout.svg';
 import NextIcon from './icons/Next.svg';
 import BackIcon from './icons/Back.svg';
@@ -33,7 +29,7 @@ function App() {
   const [pageTitle, setPageTitle] = useState('Tools');
   const navigate = useNavigate();
   const location = useLocation();
-  const { texts } = useContext(LanguageContext);
+  const { texts, changeLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -46,6 +42,11 @@ function App() {
   }, [navigate, location.pathname]);
 
   useEffect(() => {
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage) {
+      changeLanguage(storedLanguage);
+    }
+
     const pathToTitle = {
       '/': texts.home,
       '/recipes': texts.recipes,

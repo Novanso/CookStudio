@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { LanguageContext } from '../context/LanguageContext';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import './style/RecipeDetails.css';
@@ -16,6 +17,7 @@ const RecipeDetails = () => {
   const [suggestedIngredients, setSuggestedIngredients] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { texts } = useContext(LanguageContext);
 
   useEffect(() => {
     const fetchRecipeDetails = async () => {
@@ -117,12 +119,12 @@ const RecipeDetails = () => {
         <cite contentEditable="true" onBlur={handleTitleChange} suppressContentEditableWarning={true}><h1>{name}</h1></cite>
       </div>
       <p>{recipe.instructions}</p>
-      <h2>Ingredients</h2>
+      <h2>{texts.ingredients}</h2>
       <ul>
         {ingredients.map((ingredient, index) => (
           <li key={index} className="ingredient-item">
             {ingredient}
-            <button onClick={() => handleDeleteIngredient(index)}><img src={DeleteIcon} alt="Delete" className="delete-icon" /></button>
+            <button onClick={() => handleDeleteIngredient(index)}><img src={DeleteIcon} alt={texts.delete} className="delete-icon" /></button>
           </li>
         ))}
       </ul>
@@ -132,16 +134,16 @@ const RecipeDetails = () => {
           list="suggested-ingredients"
           value={newIngredient}
           onChange={(e) => setNewIngredient(e.target.value)}
-          placeholder="Add new ingredient"
+          placeholder={texts.addNewIngredients}
         />
         <datalist id="suggested-ingredients">
           {suggestedIngredients.map((ingredient, index) => (
             <option key={index} value={ingredient} />
           ))}
         </datalist>
-        <button onClick={handleAddIngredient}><img src={AddIcon} alt="Add" className="delete-icon" /></button>
+        <button onClick={handleAddIngredient}><img src={AddIcon} alt={texts.add} className="delete-icon" /></button>
       </div>
-      <button onClick={handleDelete} className='delete-button'>Delete Recipe</button>
+      <button onClick={handleDelete} className='delete-button'>{texts.deleteRecipe}</button>
     </div>
   );
 };

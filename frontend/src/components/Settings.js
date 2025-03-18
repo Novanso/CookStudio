@@ -5,8 +5,6 @@ import './style/Settings.css';
 
 const Settings = ({ authToken }) => {
   const [user, setUser] = useState(null);
-  const [profilePicture, setProfilePicture] = useState(null);
-  const [displayLanguage, setDisplayLanguage] = useState('');
   const { texts, changeLanguage, languages, language } = useContext(LanguageContext);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
@@ -44,10 +42,10 @@ const Settings = ({ authToken }) => {
       };
       const response = await axios.put('http://localhost:5000/api/users/me', formData, config);
       setUser(response.data);
-      setSuccess('Profile picture updated successfully');
+      setSuccess(texts.profilePictureUpdatedSuccessfully);
       setError(null);
     } catch (error) {
-      setError('Failed to update profile picture');
+      setError(texts.failedUpdateProfilePicture);
       setSuccess(null);
     }
   };
@@ -55,7 +53,6 @@ const Settings = ({ authToken }) => {
   const handleLanguageChange = async (e) => {
     const newLanguage = e.target.value;
     changeLanguage(newLanguage);
-    setDisplayLanguage(newLanguage);
     try {
       const config = {
         headers: { Authorization: `Bearer ${authToken}` },
@@ -63,11 +60,10 @@ const Settings = ({ authToken }) => {
       const updatedUser = { displayLanguage: newLanguage };
       const response = await axios.put('http://localhost:5000/api/users/me', updatedUser, config);
       setUser(response.data);
-      setDisplayLanguage(newLanguage);
-      setSuccess('Display language updated successfully');
+      setSuccess(texts.displayLanguageUpdatedSuccessfully);
       setError(null);
     } catch (error) {
-      setError('Failed to update display language');
+      setError(texts.failedUpdateDisplayLanguage);
       setSuccess(null);
     }
   };

@@ -22,6 +22,10 @@
   border: 1px solid #5D4042;
 }
 
+.add-recipe-card p {
+  max-width: 100px;
+}
+
 .recipe-form {
   margin-top: 20px;
   display: flex;
@@ -94,7 +98,7 @@ body {
   top: -20px;
   transform: translateY(0);
   transition: transform 200ms;
-  width: 100px;
+  width: 130px;
 }
 
 .cut-short {

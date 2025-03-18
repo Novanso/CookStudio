@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { LanguageContext } from '../context/LanguageContext';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import './style/Calendar.css'; // Importer le fichier CSS pour les styles
+import './style/Calendar.css'; 
 import axios from 'axios';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +13,7 @@ const FullScreenCalendar = () => {
   const [recipes, setRecipes] = useState([]);
   const navigate = useNavigate();
   const mealTypes = ['lunch', 'dinner'];
+  const { texts } = useContext(LanguageContext);
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -140,24 +142,23 @@ const FullScreenCalendar = () => {
         tileContent={tileContent}
       />
       <div className="meal-selector">
-        <h2>Select meals for {date.toDateString()}</h2>
+        <h2>{texts.selectMeals} {date.toDateString()}</h2>
         <div className="meal-columns">
           {mealTypes.map((mealType) => (
             <div key={mealType} className="meal-column">
               <h3>{mealType}</h3>
               <Select
-                // value={recipeOptions.find((option) => option.value === (meals.find(meal => meal.date === `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}`)))}
                 value = {() => getRecipe(mealType)}
                 onChange={(selectedOption) => handleMealChange(selectedOption, mealType)}
                 options={recipeOptions}
-                placeholder="Select a recipe"
+                placeholder={texts.selectRecipe}
                 isClearable
               />
               <button
                 onClick={() => handleViewDetails(mealType)}
                 disabled={!meals[`${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}`] || !meals[`${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}`][mealType]}
               >
-                View Details
+                {texts.viewDetails}
               </button>
             </div>
           ))}

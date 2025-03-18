@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { LanguageContext } from '../context/LanguageContext';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import './style/BookDetails.css'
@@ -16,6 +17,7 @@ const BookDetails = () => {
   const [showForm, setShowForm] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { texts } = useContext(LanguageContext);
 
   useEffect(() => {
     const fetchBookDetails = async () => {
@@ -101,7 +103,7 @@ const BookDetails = () => {
   }
 
   if (!book) {
-    return <p>Loading...</p>;
+    return <p>{texts.loading}</p>;
   }
 
   return (
@@ -112,7 +114,7 @@ const BookDetails = () => {
         <button onClick={handleDelete}><img src={DeleteIcon} alt="Delete" className="delete-icon" /></button>
       </div>
       <p>{book.description}</p>
-      <h2>Recipes</h2>
+      <h2>{texts.recipes}</h2>
       <ul>
         {book.recipes.map(recipe => (
           <li key={recipe._id}>{recipe.name}</li>
@@ -124,12 +126,12 @@ const BookDetails = () => {
           <div class="input-container ic1">
             <input type="text" id="title" class="input" value={bookTitle} placeholder=" " onChange={(e) => setBookTitle(e.target.value)} required/>
             <div class="cut"></div> 
-            <label for="title" class="placeholder">Book Title</label>
+            <label for="title" class="placeholder">{texts.bookTitle}</label>
           </div>
           <div class="input-container ic2">
             <textarea id="description" class="input" placeholder=" " value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
             <div class="cut"></div>
-            <label for="description" class="placeholder">Description</label>
+            <label for="description" class="placeholder">{texts.description}</label>
           </div>
           <div class="input-container ic2" id="select_form">
             <div id="recipes" class="input">
@@ -145,11 +147,11 @@ const BookDetails = () => {
               ))}
             </div>
             <div class="cut"></div>
-            <label for="recipes" class="placeholder">Recipes</label>
+            <label for="recipes" class="placeholder">{texts.recipes}</label>
           </div>
           <div class="buttons">
-            <button type="submit" class="submit">Update Book</button>
-            <button type="button" class="cancel" onClick={() => setShowForm(false)}>Cancel</button>
+            <button type="submit" class="submit">{texts.selectRecipe}</button>
+            <button type="button" class="cancel" onClick={() => setShowForm(false)}>{texts.cancel}</button>
           </div>
         </form>
       )}
