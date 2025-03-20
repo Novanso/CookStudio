@@ -80,7 +80,7 @@ const RecipeList = () => {
         <form onSubmit={handleSubmit} className="recipe-form">
           <div className="input-container ic1">
             <input id="name" className="input" type="text" placeholder=" " value={recipeName} onChange={(e) => setRecipeName(e.target.value)} required />
-            <div className="cut"></div>
+            <div className="cut" style={{ width: (texts.recipeName).length*5+40 }}></div>
             <label htmlFor="name" className="placeholder">{texts.recipeName}</label>
           </div>
             <button type="submit" className="submit">{texts.continue}</button>

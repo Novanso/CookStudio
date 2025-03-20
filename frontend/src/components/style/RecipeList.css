@@ -89,7 +89,6 @@
   top: -20px;
   transform: translateY(0);
   transition: transform 200ms;
-  width: 130px;
 }
 
 .cut-short {
