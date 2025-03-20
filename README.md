@@ -1,5 +1,5 @@
 <h1 align="center">CookStudio</h3>
-<img src="docs/CookStudio_logo.png" title="Logo">
+<img src="docs/CookStudio_logo.png" title="Logo" style="maxWidth:50%">
 <h3 align="center">Self-hosted Recipe Manager collaborative tool</h3>
 <br/>
 
