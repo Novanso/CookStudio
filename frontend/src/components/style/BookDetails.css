@@ -52,10 +52,6 @@
   width: 100px;
 }
 
-.cut-short {
-  width: 50px;
-}
-
 .input:focus ~ .cut,
 .input:not(:placeholder-shown) ~ .cut {
   transform: translateY(8px);

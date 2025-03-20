@@ -100,7 +100,7 @@ const RecipeDetails = () => {
   };
 
   const handleTitleChange = (e) => {
-    const updatedName = e.target.innerText;
+    const updatedName = e.target.value;
     setName(updatedName);
     saveRecipe({ ...recipe, name: updatedName });
   };
@@ -116,7 +116,7 @@ const RecipeDetails = () => {
   return (
     <div>
       <div className="recipeHeader">
-        <cite contentEditable="true" onBlur={handleTitleChange} suppressContentEditableWarning={true}><h1>{name}</h1></cite>
+        <input onChange={handleTitleChange} class="title" value={name} dir="auto" contentEditable/>
       </div>
       <p>{recipe.instructions}</p>
       <h2>{texts.ingredients}</h2>

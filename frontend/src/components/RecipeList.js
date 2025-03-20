@@ -83,7 +83,7 @@ const RecipeList = () => {
             <div className="cut" style={{ width: (texts.recipeName).length*5+40 }}></div>
             <label htmlFor="name" className="placeholder">{texts.recipeName}</label>
           </div>
-            <button type="submit" className="submit">{texts.continue}</button>
+          <button type="submit" className="submit">{texts.continue}</button>
         </form>
       )}
     </div>
