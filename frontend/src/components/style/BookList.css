@@ -5,49 +5,39 @@
 }
 
 .book-card {
-width: 150px;
-height: 150px;
-display: flex;
-justify-content: center;
-align-items: center;
-border: 1px solid #5D4042;
-border-radius: 20%;
-text-align: center;
-cursor: pointer;
-color: #fff;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #5D4042;
+  border-radius: 20%;
+  text-align: center;
+  cursor: pointer;
 }
 
 .add-book-card {
-background-color: inherit;
-border: 1px solid #5D4042;
+  background-color: inherit;
+  border: 1px solid #5D4042;
 }
 
 .book-form {
-margin-top: 20px;
-display: flex;
-flex-direction: column;
-gap: 10px;
-width: 60%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 60%;
 }
 
 .book-form button {
-width: 10vw;
-}
-
-body {
-align-items: center;
-background-color: #2c2b2b;
-display: flex;
-justify-content: center;
-height: 100vh;
+  width: 10vw;
 }
 
 .title {
-color: #eee;
-font-family: sans-serif;
-font-size: 36px;
-font-weight: 600;
-margin-top: 30px;
+  font-family: sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  margin-top: 30px;
 }
 
 .subtitle {

@@ -11,7 +11,7 @@
 # production
 /backend/build/
 /frontend/build/
-
+/frontend/public/profiles/
 
 # misc
 .DS_Store

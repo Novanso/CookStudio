@@ -1,8 +1,8 @@
 .recipe-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
   
 .recipe-card {
   width: 150px;
@@ -14,7 +14,6 @@
   border-radius: 20%;
   text-align: center;
   cursor: pointer;
-  color: #fff;
 }
 
 .add-recipe-card {
@@ -39,15 +38,7 @@
   flex-direction: column;
 }
 
-body {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-}
-
 .title {
-  color: #eee;
   font-family: sans-serif;
   font-size: 36px;
   font-weight: 600;
