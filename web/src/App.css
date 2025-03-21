@@ -100,6 +100,7 @@ body {
 .auth-section {
   display: flex;
   align-items: center;
+  width: 15em;
 }
 
 .profile-picture{
@@ -119,6 +120,7 @@ body {
   padding: 7px;
   background-color: #594041;
   border-radius: 5px;
+  position: absolute;
 }
 
 .user-account button {
@@ -135,6 +137,29 @@ body {
 .settings-btn img {
   width: 1.8em;
   height: 1.8em;
+}
+
+.dropdown-menu{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  top: 8em;
+  width: 12em;
+  height: 10em;
+  padding: 7px;
+  background-color: #5E4042;
+  border-radius: 5px;
+  padding-bottom: 20px;
+}
+
+.dropdown-menu button{
+  padding: 15px;
+  border-radius: 5px;
+}
+.dropdown-menu button:hover{
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #2c2b2b;
 }
 
 .logout-btn {

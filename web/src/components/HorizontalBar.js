@@ -13,6 +13,8 @@ const HorizontalBar = () => {
     const [authToken, setAuthToken] = useState(null);
     const [profilePicture, setProfilePicture] = useState('');
     const [pageTitle, setPageTitle] = useState('Tools');
+    const [showDropdown, setShowDropdown] = useState(false);
+
     const navigate = useNavigate();
     const location = useLocation();
     const { texts, changeLanguage } = useContext(LanguageContext);
@@ -64,6 +66,7 @@ const HorizontalBar = () => {
     );
 
     const handleLogout = () => {
+        toggleDropdown();
         localStorage.removeItem('authToken');
         localStorage.removeItem('username');
         setAuthToken(null);
@@ -72,6 +75,7 @@ const HorizontalBar = () => {
     };
 
     const handleSettings = () => {
+        toggleDropdown();
         navigate('/settings');
     };
 
@@ -81,6 +85,10 @@ const HorizontalBar = () => {
 
     const goForward = () => {
         navigate(1);
+    };
+
+    const toggleDropdown = () => {
+        setShowDropdown(!showDropdown);
     };
 
     return (
@@ -93,19 +101,20 @@ const HorizontalBar = () => {
           <div className="auth-section">
             {authToken ? (
               <>
-                <button onClick={handleSettings} className="settings-btn">
-                  <img src={SettingsIcon} alt="Settings" className="nav-icon" />
-                </button>
-                <div className='user-account'>
+                <div className='user-account' onClick={toggleDropdown}>
                   {profilePicture && <img src={profilePicture} alt="Profile" className="profile-picture" />}
                   <span>{username}</span>
                   <button className="settings-btn">
                     <img src={SelectIcon} alt="Select" className="nav-icon" />
                   </button>
                 </div>
-                <button onClick={handleLogout} className="logout-btn">
-                  <img src={LogoutIcon} alt="Logout" className="logout-icon" />
-                </button>
+                {showDropdown && (
+                    <div className="dropdown-menu">
+                        <button className="profile-btn">Profile</button>
+                        <button onClick={handleSettings} className="settings-btn">Settings</button>
+                        <button onClick={handleLogout} className="logout-btn">Logout</button>
+                    </div>
+                    )}
               </>
             ) : (
               <>
