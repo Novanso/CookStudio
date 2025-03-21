@@ -1,13 +1,14 @@
 <h1 align="center">CookStudio</h3>
-<img src="docs/CookStudio_logo.png" title="Logo" style="maxWidth:50%">
+<p align="center"><img src="docs/CookStudio_logo.png" title="Logo"  width="400"></p>
 <h3 align="center">Self-hosted Recipe Manager collaborative tool</h3>
 <br/>
 
 ## Disclaimer
 - ⚠️ The project is under **very active** development.
 - ⚠️ Expect bugs and breaking changes.
+<br/>
 
-| Planned Features                             |
+|    Planned Features                          |
 | :------------------------------------------- |
 | Create and manage your recipes               |
 | Store your recipes in books                  |
