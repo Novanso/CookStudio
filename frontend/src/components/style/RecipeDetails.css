@@ -18,6 +18,10 @@
   width: 100%;
   margin: -6px -10px;
   padding: 6px 10px;
+  transform: translate3d(0, 0, 0);
+  transition-property: background-color, border-color, box-shadow;
+  transition-duration: 85ms;
+  transition-timing-function: ease;
   border: none;
   border-radius: 4px;
   background-color: transparent;
