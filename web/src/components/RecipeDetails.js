@@ -128,19 +128,23 @@ const RecipeDetails = () => {
           </li>
         ))}
       </ul>
-      <div className="add-ingredient">
+      <div className="add-ingredient ic1">
         <input
+          className="input"
           type="text"
+          id="ingredient"
           list="suggested-ingredients"
           value={newIngredient}
           onChange={(e) => setNewIngredient(e.target.value)}
-          placeholder={texts.addNewIngredients}
+          placeholder=" "
         />
         <datalist id="suggested-ingredients">
           {suggestedIngredients.map((ingredient, index) => (
             <option key={index} value={ingredient} />
           ))}
         </datalist>
+        <div className="cut" style={{ width: (texts.ingredientName).length*5+40 }}></div>
+        <label htmlFor="ingredient" className="placeholder">{texts.ingredientName}</label>
         <button onClick={handleAddIngredient}><img src={AddIcon} alt={texts.add} className="delete-icon" /></button>
       </div>
       <button onClick={handleDelete} className='delete-button'>{texts.deleteRecipe}</button>

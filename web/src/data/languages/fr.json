@@ -27,6 +27,7 @@
   "recipeName": "Nom de la Recette",
   "ingredients": "Ingrédients",
   "addNewIngredients": "Ajouter un nouvel ingrédient",
+  "ingredientName": "Nom de l'ingrédient",
   "deleteRecipe": "Supprimer la recette",
   "_SECTION_BOOKS": "============ BOOKS ============",
   "addBook": "Ajouter un Livre",

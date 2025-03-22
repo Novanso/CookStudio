@@ -108,50 +108,48 @@ const BookDetails = () => {
 
   return (
     <div>
-      <div class="bookHeader">
+      <div className="bookHeader">
         <h1>{book.title}</h1>
         <button onClick={() => setShowForm(true)}><img src={EditIcon} alt="Edit" className="edit-icon" /></button>
         <button onClick={handleDelete}><img src={DeleteIcon} alt="Delete" className="delete-icon" /></button>
       </div>
       <p>{book.description}</p>
       <h2>{texts.recipes}</h2>
-      <ul>
         {book.recipes.map(recipe => (
-          <li key={recipe._id}>{recipe.name}</li>
+          <div key={recipe._id}>{recipe.name}</div>
         ))}
-      </ul>
 
       {showForm && (
         <form onSubmit={handleSubmit} className="book-form">
-          <div class="input-container ic1">
-            <input type="text" id="title" class="input" value={bookTitle} placeholder=" " onChange={(e) => setBookTitle(e.target.value)} required/>
-            <div class="cut"></div> 
-            <label for="title" class="placeholder">{texts.bookTitle}</label>
+          <div className="input-container ic1">
+            <input type="text" id="title" className="input" value={bookTitle} placeholder=" " onChange={(e) => setBookTitle(e.target.value)} required/>
+            <div className="cut"></div> 
+            <label htmlFor="title" className="placeholder">{texts.bookTitle}</label>
           </div>
-          <div class="input-container ic2">
-            <textarea id="description" class="input" placeholder=" " value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-            <div class="cut"></div>
-            <label for="description" class="placeholder">{texts.description}</label>
+          <div className="input-container ic2">
+            <textarea id="description" className="input" placeholder=" " value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+            <div className="cut"></div>
+            <label htmlFor="description" className="placeholder">{texts.description}</label>
           </div>
-          <div class="input-container ic2" id="select_form">
-            <div id="recipes" class="input">
+          <div className="input-container ic2" id="select_form">
+            <div id="recipes" className="input">
               {recipes.map((recipe) => (
                 <div 
                   key={recipe._id} 
                   className={`item ${selectedRecipes.includes(recipe._id) ? 'checked' : ''}`}
                   onClick={() => handleRecipeClick(recipe._id)}
                 >
-                  <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+                  <span className="checkbox"><i className="fa-solid fa-check check-icon"></i></span>
                   {recipe.name}
                 </div>
               ))}
             </div>
-            <div class="cut"></div>
-            <label for="recipes" class="placeholder">{texts.recipes}</label>
+            <div className="cut"></div>
+            <label htmlFor="recipes" className="placeholder">{texts.recipes}</label>
           </div>
-          <div class="buttons">
-            <button type="submit" class="submit">{texts.selectRecipe}</button>
-            <button type="button" class="cancel" onClick={() => setShowForm(false)}>{texts.cancel}</button>
+          <div className="buttons">
+            <button type="submit" className="submit">{texts.save}</button>
+            <button type="button" className="cancel" onClick={() => setShowForm(false)}>{texts.cancel}</button>
           </div>
         </form>
       )}

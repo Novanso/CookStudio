@@ -146,18 +146,36 @@ padding-top: 15px;
 }
 
 .ingredient-item {
-display: flex;
-justify-content: space-between;
-align-items: center;
+  width: 15em;
+  background-color: var(--light-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0em;
+  padding-left: 1.5em;
+  margin-bottom: 5px;
+  border-radius: 10px;
+}
+
+.ingredient-item button img{
+  padding: 0px;
+}
+
+.ingredient-item button img{
+  width: 1.5em;
 }
 
 .add-ingredient {
-display: flex;
-align-items: center;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  position: relative;
+  width: 22em;
+  margin-left: 40px;
 }
 
 .add-ingredient input {
-margin-right: 10px;
+  margin-right: 10px;
 }
 
 

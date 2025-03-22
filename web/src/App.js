@@ -37,6 +37,7 @@ function App() {
 
   return (
     <div className="app-container">
+      <script src="http://kit.fontawesome.com/c0f3389bdc.js" crossOrigin='anonymous'></script>
       <VerticalBar/>
       <div className="main-content">
         <HorizontalBar />
