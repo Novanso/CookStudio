@@ -12,6 +12,7 @@ import BookDetails from './components/BookDetails';
 import RecipeDetails from './components/RecipeDetails';
 import VerticalBar from './components/VerticalBar';
 import HorizontalBar from './components/HorizontalBar';
+import Profile from './components/Profile';
 import Settings from './components/Settings';
 import './App.css';
 
@@ -51,6 +52,7 @@ function App() {
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/books/:id" element={<BookDetails />} />
             <Route path="/recipes/:id" element={<RecipeDetails />} />
+            <Route path="/profile" element={<Profile authToken={authToken} />} />
             <Route path="/settings" element={<Settings authToken={authToken} />} />
           </Routes>
         </div>

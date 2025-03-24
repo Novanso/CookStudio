@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import LogoutIcon from '../icons/Logout.svg';
 import NextIcon from '../icons/Next.svg';
 import BackIcon from '../icons/Back.svg';
-import SettingsIcon from '../icons/Settings.svg'
+import PictureIcon from '../icons/Picture.svg'
 import SelectIcon from '../icons/Select.svg'
+import ProfileIcon from '../icons/Profile.svg'
+import SettingsIcon from '../icons/Settings.svg'
+import LogoutIcon from '../icons/Logout.svg';
 import { LanguageContext } from '../context/LanguageContext';
 
 const HorizontalBar = () => {
@@ -74,6 +76,10 @@ const HorizontalBar = () => {
         navigate('/login');
     };
 
+    const handleProfile = () => {
+      toggleDropdown();
+      navigate('/profile');
+    };
     const handleSettings = () => {
         toggleDropdown();
         navigate('/settings');
@@ -102,7 +108,8 @@ const HorizontalBar = () => {
             {authToken ? (
               <>
                 <div className='user-account' onClick={toggleDropdown}>
-                  {profilePicture && <img src={profilePicture} alt="Profile" className="profile-picture" />}
+                  {profilePicture && <img src={profilePicture} alt="Profile-picture" className="profile-picture" />}
+                  {!profilePicture && <img src={PictureIcon} alt="Profile-picture" className="no-profile-picture" />}
                   <span>{username}</span>
                   <button className="settings-btn">
                     <img src={SelectIcon} alt="Select" className="nav-icon" />
@@ -110,9 +117,9 @@ const HorizontalBar = () => {
                 </div>
                 {showDropdown && (
                     <div className="dropdown-menu">
-                        <button className="profile-btn">Profile</button>
-                        <button onClick={handleSettings} className="settings-btn">Settings</button>
-                        <button onClick={handleLogout} className="logout-btn">Logout</button>
+                        <button onClick={handleProfile} className="profile-btn"><img src={ProfileIcon}/>Profile</button>
+                        <button onClick={handleSettings} className="settings-btn"><img src={SettingsIcon} />Settings</button>
+                        <button onClick={handleLogout} className="logout-btn"><img src={LogoutIcon} />Logout</button>
                     </div>
                     )}
               </>
