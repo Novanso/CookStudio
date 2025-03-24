@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { LanguageProvider, LanguageContext } from './context/LanguageContext';
+import { LanguageProvider } from './context/LanguageContext';
 import App from './App';
 import './index.css';
 

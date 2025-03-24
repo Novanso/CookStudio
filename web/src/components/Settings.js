@@ -4,7 +4,6 @@ import { LanguageContext } from '../context/LanguageContext';
 import './style/Settings.css';
 
 const Settings = ({ authToken }) => {
-  const [user, setUser] = useState(null);
   const { texts, changeLanguage, languages, language } = useContext(LanguageContext);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
@@ -16,7 +15,6 @@ const Settings = ({ authToken }) => {
           headers: { Authorization: `Bearer ${authToken}` },
         };
         const response = await axios.get('http://localhost:5000/api/users/me', config);
-        setUser(response.data);
         if (response.data.displayLanguage) {
           changeLanguage(response.data.displayLanguage);
         }
@@ -37,7 +35,6 @@ const Settings = ({ authToken }) => {
       };
       const updatedUser = { displayLanguage: newLanguage };
       const response = await axios.put('http://localhost:5000/api/users/me', updatedUser, config);
-      setUser(response.data);
       setSuccess(texts.displayLanguageUpdatedSuccessfully);
       setError(null);
     } catch (error) {

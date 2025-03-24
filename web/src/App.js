@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
 // Components
 import Home from './components/Home';

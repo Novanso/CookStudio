@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Meal = require('../models/meal');
 
-// Route pour récupérer tous les repas
 router.get('/api/meals', async (req, res) => {
   try {
     const meals = await Meal.find();
@@ -12,7 +11,6 @@ router.get('/api/meals', async (req, res) => {
   }
 });
 
-// Route pour récupérer les repas d'un jour spécifique
 router.get('/api/meals/:date', async (req, res) => {
   try {
     const meals = await Meal.findOne({ date: req.params.date });
@@ -25,7 +23,6 @@ router.get('/api/meals/:date', async (req, res) => {
   }
 });
 
-// Route pour sauvegarder les repas d'un jour spécifique
 router.post('/api/meals/:date', async (req, res) => {
   try {
     const { lunch, dinner } = req.body;

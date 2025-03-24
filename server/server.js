@@ -7,24 +7,24 @@ const authRoute = require('./routes/auth');
 const mealsRoute = require('./routes/meals');
 const ingredientRoute = require('./routes/ingredientRoute');
 const userRoute = require('./routes/userRoute');
-require('dotenv').config(); // Charger le module dotenv
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: 'http://localhost:3000', // Remplacez par l'origine de votre frontend
+  origin: 'http://localhost:3000',
   optionsSuccessStatus: 200,
 };
 
-app.use(cors(corsOptions)); // Utiliser le middleware CORS avec des options
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(recipeRoute);
 app.use(bookRoute);
 app.use(mealsRoute)
 app.use(userRoute)
 app.use(ingredientRoute)
-app.use('/api/auth', authRoute); // Utiliser les routes d'authentification
+app.use('/api/auth', authRoute);
 
 mongoose.connect(process.env.MONGODB_URL);
 
