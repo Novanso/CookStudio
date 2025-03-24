@@ -3,9 +3,8 @@
   --secondary: #9EF097;
   --dark-primary: #352425;
   --dark-secondary: #281B1C;
-  --lighter-dark: #5D4042;
+  --dark-tertiary: #5E4042;
   --button-hover: #644843;
-  --dark-border: #5E4042;
 }
 
 body {
@@ -126,7 +125,7 @@ body {
   width: 12em;
   height: 2em;
   padding: 7px;
-  background-color: var(--lighter-dark);
+  background-color: var(--dark-tertiary);
   border-radius: 5px;
   position: absolute;
 }
@@ -155,7 +154,7 @@ body {
   width: 12em;
   height: 11em;
   padding: 7px;
-  background-color: var(--lighter-dark);
+  background-color: var(--dark-tertiary);
   border-radius: 5px;
   padding-bottom: 20px;
 }
@@ -192,7 +191,7 @@ body {
   border-radius: 2em 0% 0% 0%;
   border-left: 4px solid;
   border-top: 4px solid;
-  border-color: var(--dark-border);
+  border-color: var(--dark-tertiary);
   background-color: var(--dark-secondary);
 }
 

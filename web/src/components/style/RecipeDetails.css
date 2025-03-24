@@ -32,7 +32,7 @@
 
 .title:focus {
   background-color: #1f1516;
-  box-shadow: inset 0 0 0 3px #5E4042;
+  box-shadow: inset 0 0 0 3px var(--dark-tertiary);
 }
 
 .recipeHeader button {

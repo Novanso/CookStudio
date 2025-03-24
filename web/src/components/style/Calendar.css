@@ -10,7 +10,7 @@
 .react-calendar {
     border: none;
     box-shadow: none;
-    background-color: #281B1C;
+    background-color: var(--dark-secondary);
     width: 80%;
     height:100%;
     margin-right: 5vw;

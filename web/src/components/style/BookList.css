@@ -10,7 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid var(--dark-border);
+  border: 2px solid var(--dark-tertiary);
   border-radius: 20%;
   text-align: center;
   cursor: pointer;
@@ -18,7 +18,7 @@
 
 .add-book-card {
   background-color: inherit;
-  border: 2px solid var(--dark-border);
+  border: 2px solid var(--dark-tertiary);
 }
 
 .book-form {
