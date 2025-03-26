@@ -109,13 +109,13 @@ const BookList = () => {
         <form onSubmit={handleSubmit} className="book-form">
           <div className="input-container ic1">
             <input type="text" id="title" className="input" value={bookTitle} placeholder=" " onChange={(e) => setBookTitle(e.target.value)} required/>
-            <div className="cut"></div> 
-            <label for="title" className="placeholder">Book Title</label>
+            <div className="cut" style={{ width: (texts.bookTitle).length*5+40 }}></div> 
+            <label for="title" className="placeholder">{texts.bookTitle}</label>
           </div>
           <div className="input-container ic2">
             <textarea id="description" className="input" placeholder=" " value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-            <div className="cut"></div>
-            <label for="description" className="placeholder">Description</label>
+            <div className="cut" style={{ width: (texts.description).length*5+40 }}></div>
+            <label for="description" className="placeholder">{texts.description}</label>
           </div>
           <div className="input-container ic2" id="select_form">
             <div id="recipes" className="input">
@@ -130,8 +130,8 @@ const BookList = () => {
                 </div>
               ))}
             </div>
-            <div className="cut"></div>
-            <label for="recipes" className="placeholder">Recipes</label>
+            <div className="cut" style={{ width: (texts.recipes).length*5+40 }}></div>
+            <label for="recipes" className="placeholder">{texts.recipes}</label>
           </div>
           <div className="buttons">
             <button type="submit" className="submit">Add Book</button>
