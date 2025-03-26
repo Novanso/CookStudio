@@ -15,8 +15,17 @@ import HorizontalBar from './components/HorizontalBar';
 import Profile from './components/Profile';
 import Settings from './components/Settings';
 
+// CSS
 import './App.css';
+import './components/style/Auth.css'
+import './components/style/BookDetails.css'
+import './components/style/BookList.css'
+import './components/style/Calendar.css'
 import './components/style/Form.css'
+import './components/style/Notification.css'
+import './components/style/RecipeDetails.css'
+import './components/style/RecipeList.css'
+import './components/style/Settings.css'
 
 function App() {
   const [authToken, setAuthToken] = useState(null);

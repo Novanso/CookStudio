@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { LanguageContext } from '../context/LanguageContext';
 import axios from 'axios';
-import './style/Login_Register_Form.css'
 
 const LoginForm = ({ onLogin }) => {
   const [username, setUsername] = useState('');

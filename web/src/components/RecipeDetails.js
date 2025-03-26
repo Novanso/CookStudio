@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from 'react';
 import { LanguageContext } from '../context/LanguageContext';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import './style/RecipeDetails.css';
 
 import DeleteIcon from '../icons/Delete.svg';
 import AddIcon from '../icons/Add.svg';

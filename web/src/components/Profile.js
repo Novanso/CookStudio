@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { LanguageContext } from '../context/LanguageContext';
-import './style/Settings.css';
 
 const Profile = ({ authToken }) => {
   const [user, setUser] = useState(null);
