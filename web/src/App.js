@@ -14,7 +14,9 @@ import VerticalBar from './components/VerticalBar';
 import HorizontalBar from './components/HorizontalBar';
 import Profile from './components/Profile';
 import Settings from './components/Settings';
+
 import './App.css';
+import './components/style/Form.css'
 
 function App() {
   const [authToken, setAuthToken] = useState(null);

@@ -79,6 +79,8 @@ body {
   padding: 5px 20px;
 }
 
+/** ==== NAV BUTTONS ==== **/
+
 .nav-buttons {
   display: flex;
   gap: 10px;
@@ -99,6 +101,8 @@ body {
   width: 1.2em;
   height: 1.2em;
 }
+
+/** ==== Auth Section ==== **/
 
 .auth-section {
   display: flex;
@@ -141,11 +145,6 @@ body {
   text-overflow: ellipsis;
 }
 
-.settings-btn img {
-  width: 1.8em;
-  height: 1.8em;
-}
-
 .dropdown-menu{
   position: relative;
   display: flex;
@@ -175,14 +174,7 @@ body {
   margin-left: 2em;
   margin-right: 1em;
 }
-.logout-btn {
-  background: none;
-}
 
-.logout-btn img {
-  width: 1.8em;
-  height: 1.8em;
-}
 /**  ======== MAIN CONTENT ======== **/
 
 .content {

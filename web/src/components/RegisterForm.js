@@ -29,7 +29,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div class="Form">
+    <div class="form">
       {error && <p>{error}</p>}
       {success && <p>{success}</p>}
       <form onSubmit={handleSubmit} id="Register">

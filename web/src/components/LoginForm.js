@@ -22,7 +22,7 @@ const LoginForm = ({ onLogin }) => {
   };
 
   return (
-    <div class="Form">
+    <div class="form">
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit} id="Login">
         <input

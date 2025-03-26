@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { LanguageContext } from '../context/LanguageContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './style/BookList.css'; // Importer le fichier CSS pour les styles
+import './style/BookList.css';
 
 const BookList = () => {
   const [books, setBooks] = useState([]);

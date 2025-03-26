@@ -1,10 +1,16 @@
-.Form {
-    display: flex;
-    justify-content: center;
-    margin-top: 5%;
+.form {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
 }
 
-.Form form input {
+.form form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.form form input {
   display: block;
   margin: 10px;
   background-color: #2c2b2b;
@@ -15,16 +21,4 @@
   font-size: 18px;
   height: 100%;
   padding: 4px 20px 3px;
-}
-
-#Login {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-
-#Register {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
 }
