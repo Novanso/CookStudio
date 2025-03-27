@@ -134,6 +134,14 @@ body {
   position: absolute;
 }
 
+.user-account:hover {
+  cursor: pointer;
+}
+
+.user-account:active {
+  transform: scale(0.95);
+}
+
 .user-account button {
   margin-left: auto;
   padding:0px
