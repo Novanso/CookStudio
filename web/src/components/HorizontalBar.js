@@ -7,6 +7,7 @@ import PictureIcon from '../icons/Picture.svg'
 import SelectIcon from '../icons/Select.svg'
 import ProfileIcon from '../icons/Profile.svg'
 import SettingsIcon from '../icons/Settings.svg'
+import SwitchAccountIcon from '../icons/Switch-Account.svg';
 import LogoutIcon from '../icons/Logout.svg';
 import { LanguageContext } from '../context/LanguageContext';
 
@@ -119,6 +120,7 @@ const HorizontalBar = () => {
                     <div className="dropdown-menu">
                         <button onClick={handleProfile} className="profile-btn"><img src={ProfileIcon}/>Profile</button>
                         <button onClick={handleSettings} className="settings-btn"><img src={SettingsIcon} />Settings</button>
+                        <button className="logout-btn"><img src={SwitchAccountIcon} />Switch Accounts</button>
                         <button onClick={handleLogout} className="logout-btn"><img src={LogoutIcon} />Logout</button>
                     </div>
                     )}
