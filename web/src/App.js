@@ -66,7 +66,6 @@ function App() {
             <Route path="/books/:id" element={<BookDetails />} />
             <Route path="/recipes/:id" element={<RecipeDetails />} />
             <Route path="/profile" element={<Profile authToken={authToken} />} />
-            <Route path="/settings" element={<Settings authToken={authToken} />} />
             <Route path="/switch-account" element={<SwitchAccount />} />
           </Routes>
         </div>

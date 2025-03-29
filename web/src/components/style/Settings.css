@@ -5,16 +5,17 @@
   border-radius: 8px;
 }
 
-.settings-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
 .user {
   display: flex;
+  flex-direction: column;
   gap: 2em;
   margin-bottom: 3em;
+}
+
+.user-header {
+  display: flex;
+  gap: 2em;
+  align-items: baseline;
 }
 
 .user h1 {
