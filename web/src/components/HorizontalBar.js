@@ -82,8 +82,12 @@ const HorizontalBar = () => {
       navigate('/profile');
     };
     const handleSettings = () => {
-        toggleDropdown();
-        navigate('/settings');
+      toggleDropdown();
+      navigate('/settings');
+    };
+    const handleSwitch = () => {
+      toggleDropdown();
+      navigate('/switch-account');
     };
 
     const goBack = () => {
@@ -99,6 +103,13 @@ const HorizontalBar = () => {
     };
 
     return (
+      <div>
+        {!authToken && (
+          <div className="login-horizontal">
+            <img src="https://i.imgur.com/YLp3k38.png" alt="Logo" className="Full_Logo" />
+          </div>
+        )}
+        {authToken && (
         <div className="horizontal-nav">
           <div className="nav-buttons">
             <button onClick={goBack}><img src={BackIcon} alt="Back" className="nav-icon" /></button>
@@ -118,10 +129,10 @@ const HorizontalBar = () => {
                 </div>
                 {showDropdown && (
                     <div className="dropdown-menu">
-                        <button onClick={handleProfile} className="profile-btn"><img src={ProfileIcon}/>Profile</button>
-                        <button onClick={handleSettings} className="settings-btn"><img src={SettingsIcon} />Settings</button>
-                        <button className="logout-btn"><img src={SwitchAccountIcon} />Switch Accounts</button>
-                        <button onClick={handleLogout} className="logout-btn"><img src={LogoutIcon} />Logout</button>
+                        <button onClick={handleProfile}><img src={ProfileIcon}/>Profile</button>
+                        <button onClick={handleSettings}><img src={SettingsIcon} />Settings</button>
+                        <button onClick={handleSwitch}><img src={SwitchAccountIcon} />Switch Accounts</button>
+                        <button onClick={handleLogout} ><img src={LogoutIcon} />Logout</button>
                     </div>
                     )}
               </>
@@ -132,7 +143,9 @@ const HorizontalBar = () => {
               </>
             )}
           </div>
-        </div>
+        </div>)}
+        
+      </div>
     )
 };
 

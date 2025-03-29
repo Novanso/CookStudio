@@ -22,6 +22,11 @@ body {
 .Main_Logo {
   width: 4em;
 }
+
+.Full_Logo {
+  width: 12em;
+}
+
 button:active {
   transform: scale(0.98);
 }
@@ -84,6 +89,14 @@ button:active {
   align-items: center;
   justify-content: space-between;
   padding: 5px 20px;
+}
+.login-horizontal {
+  height: 50px;
+  background-color: var(--dark-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 8px 20px;
 }
 
 /** ==== NAV BUTTONS ==== **/
@@ -202,6 +215,11 @@ button:active {
   border-left: 4px solid;
   border-top: 4px solid;
   border-color: var(--dark-tertiary);
+  background-color: var(--dark-secondary);
+}
+.login-content {
+  flex: 1;
+  padding: 3em 4em;
   background-color: var(--dark-secondary);
 }
 

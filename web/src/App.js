@@ -14,6 +14,7 @@ import VerticalBar from './components/VerticalBar';
 import HorizontalBar from './components/HorizontalBar';
 import Profile from './components/Profile';
 import Settings from './components/Settings';
+import SwitchAccount from './components/SwitchAccount';
 
 // CSS
 import './App.css';
@@ -50,8 +51,9 @@ function App() {
   return (
     <div className="app-container">
       <script src="http://kit.fontawesome.com/c0f3389bdc.js" crossOrigin='anonymous'></script>
-      <VerticalBar/>
-      <div className="main-content">
+      {authToken && (<VerticalBar/>)}
+      {authToken && (
+        <div className="main-content">
         <HorizontalBar />
         <div className="content">
           <Routes>
@@ -65,9 +67,22 @@ function App() {
             <Route path="/recipes/:id" element={<RecipeDetails />} />
             <Route path="/profile" element={<Profile authToken={authToken} />} />
             <Route path="/settings" element={<Settings authToken={authToken} />} />
+            <Route path="/switch-account" element={<SwitchAccount />} />
           </Routes>
         </div>
       </div>
+      )}
+      {!authToken && (
+        <div className="main-content">
+        <HorizontalBar />
+        <div className="login-content">
+          <Routes>
+            <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
+            <Route path="/register" element={<RegisterForm />} />
+          </Routes>
+        </div>
+      </div>
+      )}
     </div>
   );
 }

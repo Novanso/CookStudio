@@ -1,16 +1,17 @@
-.form {
+.login-form {
   display: flex;
   justify-content: center;
   margin-top: 5%;
+  gap: 2em;
 }
 
-.form form {
+.login-form form {
   align-items: center;
   display: flex;
   flex-direction: column;
 }
 
-.form form input {
+.login-form form input {
   display: block;
   margin: 10px;
   background-color: #2c2b2b;
@@ -21,4 +22,53 @@
   font-size: 18px;
   height: 100%;
   padding: 4px 20px 3px;
+}
+
+.switch-account {
+  display: flex;
+  flex-direction: row;
+  gap: 4em;
+  justify-content: center;
+  top: 28%;
+  position: relative;
+}
+
+.account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+  cursor: pointer;
+}
+
+.account img {
+  width: 8em;
+  height: 8em;
+  border-radius: 8px;
+}
+
+.account span {
+  font-weight: bold;
+}
+
+.add-account {
+  background-color: var(--dark-primary);
+  border-radius: 8px;
+  width: 8em;
+  height: 8em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6em;
+  cursor: pointer;
+}
+.add-account img {
+  width: 4em;
+  height: 4em;
+  position: relative;
+  top:25%;
+  filter: invert(27%) sepia(16%) saturate(705%) hue-rotate(308deg) brightness(91%) contrast(2%);
+}
+.add-account span {
+  font-weight: bold;
 }
