@@ -10,7 +10,7 @@
 body {
   background-color: var(--dark-primary);
   color:var(--primary);
-  font-family: Arial, sans-serif;
+  font-family: Offside, sans-serif;
 }
 
 .app-container {

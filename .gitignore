@@ -15,6 +15,9 @@
 
 # data
 /web/public/profiles/
+/data/ingredients/
+/data/profiles/
+/data/recipes/
 
 # misc
 .DS_Store

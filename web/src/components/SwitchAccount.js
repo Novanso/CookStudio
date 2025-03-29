@@ -16,6 +16,14 @@ const Profile = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login-with-token', { token: account.authToken });
       const { token, user } = response.data;
+      const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+      const realUser = await fetch('http://localhost:5000/api/users/me', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await realUser.json()
+      const newAccount = { username: user, profilePicture: data.profilePicture, authToken: token};
+      const updatedAccounts = [...accounts.filter(acc => acc.username !== user), newAccount];
+      localStorage.setItem('accounts', JSON.stringify(updatedAccounts));
       localStorage.setItem('authToken', token);
       localStorage.setItem('username', user);
       navigate('/');

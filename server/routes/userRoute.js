@@ -8,7 +8,7 @@ const path = require('path');
 // Configure multer for image upload
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../../frontend/public/profiles'));
+    cb(null, path.join(__dirname, '../../web/public/profiles'));
   },
   filename: (req, file, cb) => {
     cb(null, `${req.user.userId}-${Date.now()}${path.extname(file.originalname)}`);

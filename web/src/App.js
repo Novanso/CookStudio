@@ -77,8 +77,15 @@ function App() {
         <HorizontalBar />
         <div className="login-content">
           <Routes>
+          <Route path="/" element={<Home />} />
+            <Route path="/recipes" element={<RecipeList />} />
+            <Route path="/books" element={<BookList />} />
+            <Route path="/calendar" element={<Calendar />} />
             <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
             <Route path="/register" element={<RegisterForm />} />
+            <Route path="/books/:id" element={<BookDetails />} />
+            <Route path="/recipes/:id" element={<RecipeDetails />} />
+            <Route path="/switch-account" element={<SwitchAccount />} />
           </Routes>
         </div>
       </div>

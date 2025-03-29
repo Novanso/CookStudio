@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import EditPictureIcon from '../icons/EditPicture.svg'
 import { LanguageContext } from '../context/LanguageContext';
 
 const Profile = ({ authToken }) => {
@@ -55,7 +56,7 @@ const Profile = ({ authToken }) => {
           {user.profilePicture && (
             <div className="pfp-edit">
               <label htmlFor="profilePicture">
-                <div class="profile-pic" style={{backgroundImage: 'url(http://localhost:3000/' + user.profilePicture}}>
+                <div className="profile-pic" style={{backgroundImage: 'url(http://localhost:3000/' + user.profilePicture}}>
                   <span>Change Image</span>
                 </div>
               </label>
@@ -65,7 +66,7 @@ const Profile = ({ authToken }) => {
           {!user.profilePicture && (
             <div className="pfp-edit">
               <label htmlFor="profilePicture">
-                <div class="profile-pic" style={{backgroundImage: 'url(http://localhost:3000/'}}>
+                <div className="profile-pic" style={{backgroundImage: `url(${EditPictureIcon})`}}>
                   <span>Change Image</span>
                 </div>
               </label>
