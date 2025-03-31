@@ -12,7 +12,8 @@ import BookDetails from './components/BookDetails';
 import RecipeDetails from './components/RecipeDetails';
 import VerticalBar from './components/VerticalBar';
 import HorizontalBar from './components/HorizontalBar';
-import Account from './components/Account';
+import Profile from './components/Profile';
+import Settings from './components/Settings';
 import SwitchAccount from './components/SwitchAccount';
 
 // CSS
@@ -64,7 +65,7 @@ function App() {
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/books/:id" element={<BookDetails />} />
             <Route path="/recipes/:id" element={<RecipeDetails />} />
-            <Route path="/account" element={<Account authToken={authToken} />} />
+            <Route path="/settings" element={<Settings authToken={authToken} />} />
             <Route path="/switch-account" element={<SwitchAccount />} />
           </Routes>
         </div>

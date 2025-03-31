@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { LanguageContext } from '../context/LanguageContext';
+import Profile from './Profile';
 
 const Settings = ({ authToken }) => {
   const { texts } = useContext(LanguageContext);
@@ -26,7 +27,11 @@ const Settings = ({ authToken }) => {
   return (
     <div className="settings-container">
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}    
+      {success && <p style={{ color: 'green' }}>{success}</p>}   
+      <div class="SectionLeft">Section Left</div>
+      <div class="SectionRight">
+        <Profile authToken={authToken} />
+      </div> 
     </div>
   );
 };

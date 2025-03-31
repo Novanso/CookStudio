@@ -1,12 +1,20 @@
 .settings-container {
-  max-width: 600px;
   margin: 0 auto;
   border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+}
+.SectionLeft {
+  width: 20em;
+}
+.SectionRight {
+  width: 50em;
 }
 
 .user {
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 1.5em;
 }
 
@@ -61,7 +69,7 @@
 
 select {
   appearance: none;
-  width: 15em;
+  width: 20em;
   outline: 10px red;
   border: 0;
   box-shadow: none;

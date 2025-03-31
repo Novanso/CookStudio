@@ -3,7 +3,7 @@ import axios from 'axios';
 import EditPictureIcon from '../icons/EditPicture.svg'
 import { LanguageContext } from '../context/LanguageContext';
 
-const Account = ({ authToken }) => {
+const Profile = ({ authToken }) => {
   const [user, setUser] = useState(null);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
@@ -135,4 +135,4 @@ const Account = ({ authToken }) => {
   );
 };
 
-export default Account;
+export default Profile;
