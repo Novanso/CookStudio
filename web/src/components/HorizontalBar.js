@@ -5,7 +5,6 @@ import NextIcon from '../icons/Next.svg';
 import BackIcon from '../icons/Back.svg';
 import PictureIcon from '../icons/Picture.svg'
 import SelectIcon from '../icons/Select.svg'
-import ProfileIcon from '../icons/Profile.svg'
 import SettingsIcon from '../icons/Settings.svg'
 import SwitchAccountIcon from '../icons/Switch-Account.svg';
 import LogoutIcon from '../icons/Logout.svg';

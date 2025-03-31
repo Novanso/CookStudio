@@ -1,15 +1,42 @@
+/** ======== SETTINGS ======== **/
+
 .settings-container {
   margin: 0 auto;
   border-radius: 8px;
   display: flex;
   flex-direction: row;
+  gap:2em
 }
+
+/** ======== SECTION LEFT ======== **/
 .SectionLeft {
-  width: 20em;
+  display: flex;
+  flex-direction: column;
+  gap:1em;
+  width: 22em;
+  white-space: normal;
+  padding-right: 1em;
+  border-right: 2px solid var(--primary);
 }
+
+.settings-button {
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.settings-button:hover {
+  background-color: var(--dark-tertiary);
+}
+
+
+/** ======== SECTION RIGHT ======== **/
 .SectionRight {
   width: 50em;
+  margin-left: 1em;
 }
+
+/** ======== ACCOUNT ======== **/
 
 .user {
   display: flex;
@@ -129,3 +156,7 @@ select {
   flex-direction: row;
   gap:1em;
 }
+
+/** ======== PREFERENCES ======== **/
+/** ======== CUSTOMIZATION ======== **/
+/** ======== NOTIFICATIONS ======== **/

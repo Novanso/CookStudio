@@ -12,7 +12,6 @@ import BookDetails from './components/BookDetails';
 import RecipeDetails from './components/RecipeDetails';
 import VerticalBar from './components/VerticalBar';
 import HorizontalBar from './components/HorizontalBar';
-import Profile from './components/Profile';
 import Settings from './components/Settings';
 import SwitchAccount from './components/SwitchAccount';
 
