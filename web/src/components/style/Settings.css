@@ -1,21 +1,18 @@
 .settings-container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 20px;
   border-radius: 8px;
 }
 
 .user {
   display: flex;
   flex-direction: column;
-  gap: 2em;
-  margin-bottom: 3em;
+  gap: 1.5em;
 }
 
 .user-header {
   display: flex;
   gap: 2em;
-  align-items: baseline;
 }
 
 .user h1 {
@@ -93,4 +90,34 @@ select {
   padding: .25em;
   border-radius: .50em;
   background: pink;
+}
+
+.country {
+  display: flex;
+  flex-direction: row;
+}
+
+.allergies-container {
+  height: 200px;
+  display:flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.allergies-card {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #5D4042;
+  text-align: center;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  gap:1em;
 }

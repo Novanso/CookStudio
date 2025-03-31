@@ -77,9 +77,9 @@ const HorizontalBar = () => {
         navigate('/login');
     };
 
-    const handleProfile = () => {
+    const handleAccount = () => {
       toggleDropdown();
-      navigate('/profile');
+      navigate('/account');
     };
     const handleSwitch = () => {
       toggleDropdown();
@@ -125,7 +125,7 @@ const HorizontalBar = () => {
                 </div>
                 {showDropdown && (
                     <div className="dropdown-menu">
-                        <button onClick={handleProfile}><img src={ProfileIcon}/>Profile</button>
+                        <button onClick={handleAccount}><img src={ProfileIcon}/>Account</button>
                         <button onClick={handleSwitch}><img src={SwitchAccountIcon} />Switch Accounts</button>
                         <button onClick={handleLogout} ><img src={LogoutIcon} />Logout</button>
                     </div>

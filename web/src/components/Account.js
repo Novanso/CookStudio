@@ -3,7 +3,7 @@ import axios from 'axios';
 import EditPictureIcon from '../icons/EditPicture.svg'
 import { LanguageContext } from '../context/LanguageContext';
 
-const Profile = ({ authToken }) => {
+const Account = ({ authToken }) => {
   const [user, setUser] = useState(null);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
@@ -97,6 +97,14 @@ const Profile = ({ authToken }) => {
             <h1>{ user.username }</h1>
           </div>
           <div className="input-container">
+            <label htmlFor="country" name="selector">Country</label>
+            <select id="country" value="country">
+              <option>France</option>
+              <option>Italia</option>
+              <option>UK</option>
+            </select>
+          </div>
+          <div className="input-container">
             <label htmlFor="displayLanguage" name="selector">{texts.displayLanguage}</label>
             <select
               id="displayLanguage"
@@ -110,10 +118,21 @@ const Profile = ({ authToken }) => {
               ))}
             </select>
           </div>
+          <div className="allergies-container">
+            <label>Allergies</label>
+            <div className="cards">
+              <div className="allergies-card">
+                <p className="cardTitle">allergie 1</p>
+              </div>
+              <div className="allergies-card">
+                <p className="cardTitle">allergie 2</p>
+              </div>
+            </div>
+          </div>
         </div> 
       )}
     </div>
   );
 };
 
-export default Profile;
+export default Account;
