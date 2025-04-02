@@ -5,6 +5,7 @@
   --dark-secondary: #281B1C;
   --dark-tertiary: #5E4042;
   --button-hover: #644843;
+  --main-gradient: linear-gradient(#1EAE81 0%, #183975 69%, #AD3C3E 100%);
 }
 
 body {
@@ -127,26 +128,27 @@ button:active {
 .auth-section {
   display: flex;
   align-items: center;
-  width: 15em;
+  width: 2em;
 }
 
 .profile-picture{
-  width: 2em;
-  height: 2em;
+  width: 35px!important;
+  height: 35px!important;
   border: 2px solid;
   border-color: var(--primary);
   border-radius: 3px;
 }
-.profile-picture{
-  width: 2em;
-  height: 2em;
+.no-profile-picture{
+  width: 35px;
+  height: 35px;
 }
 
 .user-account{
   display: flex;
   align-items: center;
   gap: 0.8em;
-  width: 12em;
+  min-width: 9em;
+  width: auto;
   height: 2em;
   padding: 7px;
   background-color: var(--dark-tertiary);
@@ -179,16 +181,28 @@ button:active {
   display: flex;
   flex-direction: column;
   top: 3.5em;
+  right: 1em;
   width: 12em;
   height: auto;
   padding: 7px;
   background-color: var(--dark-tertiary);
-  border-radius: 5px;
+  backdrop-filter: blur(4px);
+  border-radius: 4px;
+}
+
+.drop-account{
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  border-bottom: 1px solid var(--primary);
+  height: auto;
+  padding: 15px;
   padding-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .dropdown-menu button{
-  padding: 15px;
+  padding: 6px;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -196,12 +210,10 @@ button:active {
   white-space: nowrap;
 }
 .dropdown-menu button:hover{
-  padding: 15px;
-  border-radius: 5px;
   background-color: var(--dark-primary);
 }
 .dropdown-menu button img{
-  width: 1.6em;
+  width: 1em;
   margin-left: 0.4em;
   margin-right: 1em;
 }

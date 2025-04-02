@@ -5,6 +5,7 @@ import NextIcon from '../icons/Next.svg';
 import BackIcon from '../icons/Back.svg';
 import PictureIcon from '../icons/Picture.svg'
 import SelectIcon from '../icons/Select.svg'
+import AdminIcon from '../icons/Administration.svg'
 import SettingsIcon from '../icons/Settings.svg'
 import SwitchAccountIcon from '../icons/Switch-Account.svg';
 import LogoutIcon from '../icons/Logout.svg';
@@ -80,9 +81,10 @@ const HorizontalBar = () => {
       toggleDropdown();
       navigate('/settings');
     };
-    const handleSwitch = () => {
+
+    const handleAdmin = () => {
       toggleDropdown();
-      navigate('/switch-account');
+      navigate('/administration');
     };
 
     const goBack = () => {
@@ -96,6 +98,14 @@ const HorizontalBar = () => {
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
     };
+
+    const profileButton = document.getElementById('dropdownProfileButton')
+    
+    document.addEventListener('click', (e) => {
+      if(profileButton) {
+        if(!profileButton.contains(e.target)) setShowDropdown(false)
+      }
+    });
 
     return (
       <div>
@@ -114,19 +124,20 @@ const HorizontalBar = () => {
           <div className="auth-section">
             {authToken ? (
               <>
-                <div className='user-account' onClick={toggleDropdown}>
+                <div className='user-icon' id="dropdownProfileButton" onClick={toggleDropdown}>
                   {profilePicture && <img src={profilePicture} alt="Profile-picture" className="profile-picture" />}
                   {!profilePicture && <img src={PictureIcon} alt="Profile-picture" className="no-profile-picture" />}
-                  <span>{username}</span>
-                  <button className="settings-btn">
-                    <img src={SelectIcon} alt="Select" className="nav-icon" />
-                  </button>
                 </div>
                 {showDropdown && (
                     <div className="dropdown-menu">
+                        <div className='drop-account'>
+                          {profilePicture && <img src={profilePicture} alt="Profile-picture" className="profile-picture" />}
+                          {!profilePicture && <img src={PictureIcon} alt="Profile-picture" className="no-profile-picture" />}
+                          <span>{username}</span>
+                        </div>
                         <button onClick={handleAccount}><img src={SettingsIcon}/>Settings</button>
-                        <button onClick={handleSwitch}><img src={SwitchAccountIcon} />Switch Accounts</button>
-                        <button onClick={handleLogout} ><img src={LogoutIcon} />Logout</button>
+                        <button onClick={handleAdmin}><img src={AdminIcon}/>Admin Section</button>
+                        <button onClick={handleLogout}><img src={LogoutIcon} />Logout</button>
                     </div>
                     )}
               </>
