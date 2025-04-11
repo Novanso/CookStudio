@@ -33,24 +33,22 @@ const Settings = ({ authToken }) => {
   
   return (
     <div className="settings-container">
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}   
       <div className="SectionLeft">
         <div className='settings-button' onClick={() => handleActivepage(('Account'))}>
-          <h2>Account</h2>
-          <div>Edit your profile and account</div>
+          <h2>{ texts.account }</h2>
+          <div>{ texts.subAccount }</div>
         </div>
         <div className='settings-button' onClick={() => handleActivepage('Preferences')}>
-          <h2>Preferences</h2>
-          <div>Select your preferences about food</div>
+          <h2>{ texts.preferences }</h2>
+          <div>{ texts.subPreferences }</div>
         </div>
         <div className='settings-button' onClick={() => handleActivepage('Customization')}>
-          <h2>Customization</h2>
-          <div>Set your visual preferences for the app</div>
+          <h2>{ texts.customization }</h2>
+          <div>{ texts.subCustomization }</div>
         </div>
         <div className='settings-button' onClick={() => handleActivepage('Notifications')}>
-          <h2>Notifications</h2>
-          <div>Customize how you're notified</div>
+          <h2>{ texts.notifications }</h2>
+          <div>{ texts.subNotifications }</div>
         </div>
       </div>
       <div className="SectionRight"> 

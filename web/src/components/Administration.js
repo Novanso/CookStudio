@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { LanguageContext } from '../context/LanguageContext';
 
+import Ingredients from './Ingredients';
+
 const Administration = ({ authToken }) => {
   const { texts } = useContext(LanguageContext);
   const [success, setSuccess] = useState(null);
@@ -28,27 +30,30 @@ const Administration = ({ authToken }) => {
   };
   
   return (
-    <div className="settings-container">
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}   
+    <div className="settings-container"> 
       <div className="SectionLeft">
-        <div className='settings-button' onClick={() => handleActivepage(('Account'))}>
-          <h2>Section 1</h2>
-          <div>Section 1 description</div>
+        <div className='settings-button' onClick={() => handleActivepage(('User'))}>
+        <div>{ texts.user }</div>
         </div>
-        <div className='settings-button' onClick={() => handleActivepage('Preferences')}>
-          <h2>Section 2</h2>
-          <div>Section 2 description</div>
+        <div className='settings-button' onClick={() => handleActivepage('Tags')}>
+          <div>Handle Tags</div>
         </div>
-        <div className='settings-button' onClick={() => handleActivepage('Customization')}>
-          <h2>Section 3</h2>
-          <div>Section 3 description</div>
+        <div className='settings-button' onClick={() => handleActivepage('Categories')}>
+          <div>Handle Categories</div>
         </div>
-        <div className='settings-button' onClick={() => handleActivepage('Notifications')}>
-          <h2>Section 4</h2>
-          <div>Section 4 description</div>
+        <div className='settings-button' onClick={() => handleActivepage('External')}>
+          <div>External Access</div>
+        </div>
+        <div className='settings-button' onClick={() => handleActivepage('Ingredients')}>
+          <div>{ texts.ingredients }</div>
+        </div>
+        <div className='settings-button' onClick={() => handleActivepage('Statistics')}>
+          <div>{ texts.stats }</div>
         </div>
       </div>
+      { activePage === 'Ingredients' && (
+          <Ingredients authToken={authToken} />
+        ) }
     </div>
   );
 };

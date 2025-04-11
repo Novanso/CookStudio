@@ -12,8 +12,9 @@
 .SectionLeft {
   display: flex;
   flex-direction: column;
-  gap:1em;
+  gap:2em;
   width: 22em;
+  height: 35em;
   white-space: normal;
   padding-right: 1em;
   border-right: 2px solid var(--primary);
@@ -21,7 +22,7 @@
 
 .settings-button {
   cursor: pointer;
-  padding: 12px;
+  padding: 15px;
   border-radius: 10px;
 }
 
@@ -40,6 +41,14 @@
 }
 
 /** ======== ACCOUNT ======== **/
+
+.user-container {
+  margin: 0 auto;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap:2em
+}
 
 .user {
   display: flex;

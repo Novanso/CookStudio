@@ -59,7 +59,13 @@ const Account = ({ authToken }) => {
       };
       const updatedUser = { displayLanguage: newLanguage };
       const response = await axios.put('http://localhost:5000/api/users/me', updatedUser, config);
-      setSuccess(texts.displayLanguageUpdatedSuccessfully);
+      if (response) {
+        console.log(language)
+        console.log({language})
+        changeLanguage(newLanguage);
+        console.log({language})
+        setSuccess(texts.displayLanguageUpdatedSuccessfully);
+      }
       setError(null);
     } catch (error) {
       setError(texts.failedUpdateDisplayLanguage);
@@ -68,7 +74,7 @@ const Account = ({ authToken }) => {
   };
 
   return (
-    <div className="settings-container">
+    <div className="user-container">
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>{success}</p>}
       {user && (
