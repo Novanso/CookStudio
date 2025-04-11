@@ -13,7 +13,6 @@ import RecipeDetails from './components/RecipeDetails';
 import VerticalBar from './components/VerticalBar';
 import HorizontalBar from './components/HorizontalBar';
 import Settings from './components/Settings';
-import SwitchAccount from './components/SwitchAccount';
 import Administration from './components/Administration';
 
 // CSS
@@ -67,7 +66,6 @@ function App() {
             <Route path="/recipes/:id" element={<RecipeDetails />} />
             <Route path="/settings" element={<Settings authToken={authToken} />} />
             <Route path="/administration" element={<Administration authToken={authToken} />} />
-            <Route path="/switch-account" element={<SwitchAccount />} />
           </Routes>
         </div>
       </div>
@@ -85,7 +83,6 @@ function App() {
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/books/:id" element={<BookDetails />} />
             <Route path="/recipes/:id" element={<RecipeDetails />} />
-            <Route path="/switch-account" element={<SwitchAccount />} />
           </Routes>
         </div>
       </div>

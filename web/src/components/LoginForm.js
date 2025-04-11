@@ -55,7 +55,12 @@ const LoginForm = ({ onLogin }) => {
       localStorage.setItem('username', user);
       navigate('/');
     } catch (error) {
-      console.error('Failed to switch account:', error);
+      if(error.status == 401) {
+        setShowForm(!showForm)
+        setUsername(account.username)
+      } else {
+        console.error('Failed to switch account:', error);
+      }
     }
   };
 
