@@ -42,7 +42,7 @@ const RecipeList = () => {
         ingredients: [],
         instructions: '',
       };
-      await axios.post('http://localhost:5000/api/recipes', newRecipe, config);
+      await axios.post('http://localhost:5000/api/recipes', config, newRecipe);
       setSuccess('Recipe added successfully');
       setRecipeName('');
       setError(null);

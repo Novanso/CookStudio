@@ -132,14 +132,14 @@ const RecipeDetails = () => {
           className="input"
           type="text"
           id="ingredient"
-          list="suggested-ingredients"
+          list="suggestedIngredients"
           value={newIngredient}
           onChange={(e) => setNewIngredient(e.target.value)}
           placeholder=" "
         />
-        <datalist id="suggested-ingredients">
+        <datalist id="suggestedIngredients">
           {suggestedIngredients.map((ingredient, index) => (
-            <option key={index} value={ingredient} />
+            <option key={index} value={ingredient.title} />
           ))}
         </datalist>
         <div className="cut" style={{ width: (texts.ingredientName).length*5+40 }}></div>

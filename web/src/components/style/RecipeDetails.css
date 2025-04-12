@@ -147,23 +147,28 @@
 
 .ingredient-item {
   width: 15em;
-  background-color: var(--light-primary);
+  background-color: var(--dark-primary);
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 0em;
-  padding-left: 1.5em;
+  padding-left: 1em;
   margin-bottom: 5px;
   border-radius: 10px;
 }
 
-.ingredient-item button img{
-  padding: 0px;
+.DeleteButton {
+  margin-right:15px
+}
+
+.ingredient-item button {
+  padding: 7px;
 }
 
 .ingredient-item button img{
-  width: 1.5em;
+  padding: 0px;
+  width: 1em;
 }
+
 
 .add-ingredient {
   display: flex;

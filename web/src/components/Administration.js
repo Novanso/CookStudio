@@ -51,9 +51,11 @@ const Administration = ({ authToken }) => {
           <div>{ texts.stats }</div>
         </div>
       </div>
-      { activePage === 'Ingredients' && (
-          <Ingredients authToken={authToken} />
-        ) }
+      <div className="SectionRight"> 
+        { activePage === 'Ingredients' && (
+            <Ingredients authToken={authToken} />
+          ) }
+      </div>
     </div>
   );
 };
