@@ -106,8 +106,7 @@
   font-weight: bold;
 }
 
-select {
-  appearance: none;
+.input-container select {
   width: 20em;
   outline: 10px red;
   border: 0;

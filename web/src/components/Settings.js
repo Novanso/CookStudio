@@ -35,19 +35,19 @@ const Settings = ({ authToken }) => {
     <div className="settings-container">
       <div className="SectionLeft">
         <div className='settings-button' onClick={() => handleActivepage(('Account'))}>
-          <h2>{ texts.account }</h2>
+          <h3>{ texts.account }</h3>
           <div>{ texts.subAccount }</div>
         </div>
         <div className='settings-button' onClick={() => handleActivepage('Preferences')}>
-          <h2>{ texts.preferences }</h2>
+          <h3>{ texts.preferences }</h3>
           <div>{ texts.subPreferences }</div>
         </div>
         <div className='settings-button' onClick={() => handleActivepage('Customization')}>
-          <h2>{ texts.customization }</h2>
+          <h3>{ texts.customization }</h3>
           <div>{ texts.subCustomization }</div>
         </div>
         <div className='settings-button' onClick={() => handleActivepage('Notifications')}>
-          <h2>{ texts.notifications }</h2>
+          <h3>{ texts.notifications }</h3>
           <div>{ texts.subNotifications }</div>
         </div>
       </div>

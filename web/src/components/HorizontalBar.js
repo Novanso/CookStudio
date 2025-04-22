@@ -13,6 +13,7 @@ import { LanguageContext } from '../context/LanguageContext';
 
 const HorizontalBar = () => {
     const [username, setUsername] = useState('');
+    const [role, setRole] = useState('');
     const [authToken, setAuthToken] = useState(null);
     const [profilePicture, setProfilePicture] = useState('');
     const [pageTitle, setPageTitle] = useState('Tools');
@@ -29,8 +30,8 @@ const HorizontalBar = () => {
         setAuthToken(token);
         setUsername(user);
         if (!token && location.pathname !== '/register') {
-            navigate('/login');
-          }
+          navigate('/login');
+        }
         if (storedLanguage) {
           changeLanguage(storedLanguage);
         }
@@ -57,6 +58,7 @@ const HorizontalBar = () => {
                 headers: { Authorization: `Bearer ${authToken}` },
               });
               const data = await response.json();
+              setRole(data.role)
               setProfilePicture(data.profilePicture || '');
             } catch (error) {
               console.error('Failed to fetch user profile:', error);
@@ -99,14 +101,6 @@ const HorizontalBar = () => {
         setShowDropdown(!showDropdown);
     };
 
-    const profileButton = document.getElementById('dropdownProfileButton')
-    
-    document.addEventListener('click', (e) => {
-      if(profileButton) {
-        if(!profileButton.contains(e.target)) setShowDropdown(false)
-      }
-    });
-
     return (
       <div>
         {!authToken && (
@@ -136,7 +130,7 @@ const HorizontalBar = () => {
                           <span>{username}</span>
                         </div>
                         <button onClick={handleAccount}><img src={SettingsIcon}/>Settings</button>
-                        <button onClick={handleAdmin}><img src={AdminIcon}/>Admin Section</button>
+                        {role == 'admin' && <button onClick={handleAdmin}><img src={AdminIcon}/>Admin Section</button> }
                         <button onClick={handleLogout}><img src={LogoutIcon} />Logout</button>
                     </div>
                     )}

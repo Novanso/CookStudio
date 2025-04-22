@@ -3,12 +3,15 @@ import axios from 'axios';
 import { LanguageContext } from '../context/LanguageContext';
 
 import Ingredients from './Ingredients';
+import Users from './Users';
+
+import './style/Administration.css'
 
 const Administration = ({ authToken }) => {
   const { texts } = useContext(LanguageContext);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
-  const [activePage, setActivePage] = useState('Account');
+  const [activePage, setActivePage] = useState('Users');
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -32,8 +35,8 @@ const Administration = ({ authToken }) => {
   return (
     <div className="settings-container"> 
       <div className="SectionLeft">
-        <div className='settings-button' onClick={() => handleActivepage(('User'))}>
-        <div>{ texts.user }</div>
+        <div className='settings-button' onClick={() => handleActivepage(('Users'))}>
+        <div>{ texts.users }</div>
         </div>
         <div className='settings-button' onClick={() => handleActivepage('Tags')}>
           <div>Handle Tags</div>
@@ -54,7 +57,10 @@ const Administration = ({ authToken }) => {
       <div className="SectionRight"> 
         { activePage === 'Ingredients' && (
             <Ingredients authToken={authToken} />
-          ) }
+        ) }
+        { activePage === 'Users' && (
+          <Users authToken={authToken} />
+        ) }
       </div>
     </div>
   );

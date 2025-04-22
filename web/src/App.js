@@ -29,6 +29,7 @@ import './components/style/Settings.css'
 
 function App() {
   const [authToken, setAuthToken] = useState(null);
+  const [role, setRole] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -39,6 +40,25 @@ function App() {
       navigate('/login');
     }
   }, [navigate, location.pathname]);
+
+  useEffect(() => {
+      const fetchUserProfile = async () => {
+        if (authToken) {
+          try {
+            const response = await fetch('http://localhost:5000/api/users/me', {
+              headers: { Authorization: `Bearer ${authToken}` },
+            });
+            const data = await response.json();
+            setRole(data.role)
+          } catch (error) {
+            console.error('Failed to fetch user profile:', error);
+          }
+        }
+      };
+  
+      fetchUserProfile();
+    }, [authToken]
+  );
 
   const handleLogin = (token, user) => {
     localStorage.setItem('authToken', token);
@@ -51,10 +71,9 @@ function App() {
     <div className="app-container">
       <script src="http://kit.fontawesome.com/c0f3389bdc.js" crossOrigin='anonymous'></script>
       {authToken && (<VerticalBar/>)}
-      {authToken && (
-        <div className="main-content">
+      <div className="main-content">
         <HorizontalBar />
-        <div className="content">
+        <div className={`${authToken ? "" : "login-"}content`}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/recipes" element={<RecipeList />} />
@@ -64,29 +83,15 @@ function App() {
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/books/:id" element={<BookDetails />} />
             <Route path="/recipes/:id" element={<RecipeDetails />} />
-            <Route path="/settings" element={<Settings authToken={authToken} />} />
-            <Route path="/administration" element={<Administration authToken={authToken} />} />
           </Routes>
+          {authToken && (
+            <Routes>
+              <Route path="/settings" element={<Settings authToken={authToken} />} />
+              <Route path="/administration" element={<Administration authToken={authToken} />} />
+            </Routes>
+          )}
         </div>
       </div>
-      )}
-      {!authToken && (
-        <div className="main-content">
-        <HorizontalBar />
-        <div className="login-content">
-          <Routes>
-          <Route path="/" element={<Home />} />
-            <Route path="/recipes" element={<RecipeList />} />
-            <Route path="/books" element={<BookList />} />
-            <Route path="/calendar" element={<Calendar />} />
-            <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
-            <Route path="/register" element={<RegisterForm />} />
-            <Route path="/books/:id" element={<BookDetails />} />
-            <Route path="/recipes/:id" element={<RecipeDetails />} />
-          </Routes>
-        </div>
-      </div>
-      )}
     </div>
   );
 }

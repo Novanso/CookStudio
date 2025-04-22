@@ -1,0 +1,70 @@
+/** ======== ADMINISTRATION ======== **/
+/** ======== USERS ======== **/
+/** ======== TAGS ======== **/
+/** ======== CATEGORIES ======== **/
+/** ======== EXTERNAL ACCESS ======== **/
+/** ======== INGREDIENTS ======== **/
+.ingredients-container {
+    margin: 0 auto;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap:2em
+}
+
+.addIngredient {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    position: relative;
+    width: 22em;
+}
+
+.ingredients {
+    background-color: var(--dark-primary);
+    border-radius: 10px;
+    padding: 8px;
+    padding-left: 2em;
+}
+
+.ingredient {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0em;
+    padding-left: 1em;
+    margin-right: 1em;
+}
+
+.ingredients > li + li {
+    border-top: 3px solid var(--dark-tertiary);
+}
+
+.unitTypeSelect {
+    width: 5em;
+    height: 2em;
+    padding: 0 1em;
+    color: var(--primary);
+    border-radius: .25em;
+    background-color: var(--dark-tertiary);
+    background-image: none;
+    cursor: pointer;
+    outline: 10px red;
+    border: 0;
+    box-shadow: none;
+}
+
+.DeleteButton {
+    margin-right:15px
+}
+
+.ingredient button {
+    padding: 7px;
+}
+
+.ingredient button img{
+    padding: 0px;
+    width: 1em;
+}
+
+/** ======== STATS ======== **/

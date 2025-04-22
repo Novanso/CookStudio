@@ -57,4 +57,14 @@ router.put('/api/users/me', auth, upload.single('profilePicture'), async (req, r
   }
 });
 
+// Get all users profile
+router.get('/api/users', auth, async (req, res) => {
+  try {
+    const user = await User.find();
+    res.send(user);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 module.exports = router;

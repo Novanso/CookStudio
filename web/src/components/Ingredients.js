@@ -6,6 +6,8 @@ import DeleteIcon from '../icons/Delete.svg';
 import PictureIcon from '../icons/Picture.svg';
 import AddIcon from '../icons/Add.svg';
 
+
+
 const Ingredients = ({ authToken }) => {
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState('');
@@ -31,7 +33,6 @@ const Ingredients = ({ authToken }) => {
 
     const handleAddIngredient = async () => {
     if (newIngredient.trim() !== '') {
-      const updatedIngredients = [...ingredients, newIngredient];
       const newFullIngredient = {
         title: newIngredient,
         unitType: 'g',
@@ -68,10 +69,10 @@ const Ingredients = ({ authToken }) => {
 
 
   return (
-    <div className="user-container">
+    <div className="ingredients-container">
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <h1>{ texts.ingredients }</h1>
-      <div className="add-ingredient">
+      <div className="addIngredient">
         <input
         className="input"
         type="text"
@@ -85,12 +86,19 @@ const Ingredients = ({ authToken }) => {
         <label htmlFor="ingredient" className="placeholder">{texts.ingredientName}</label>
         <button onClick={handleAddIngredient}><img src={AddIcon} alt={texts.add} className="add-icon" /></button>
         </div>
-        <ul>
+        <ul className="ingredients">
             {ingredients.map((ingredient, index) => (
-            <li key={index} className="ingredient-item">
-                <button className="PictureButton"><img src={PictureIcon} /></button>
-                <button className="DeleteButton" onClick={() => handleDeleteIngredient(ingredient._id)}><img src={DeleteIcon} alt={texts.delete} className="delete-icon" /></button>
+            <li key={index} className="ingredient">
                 {ingredient.title}
+                <div className='actionButtons'>
+                  <select id="unit" value="unit" className='unitTypeSelect'>
+                    <option>g</option>
+                    <option>L</option>
+                    <option>aucun</option>
+                  </select>
+                  <button className="PictureButton"><img src={PictureIcon} /></button>
+                  <button className="DeleteButton" onClick={() => handleDeleteIngredient(ingredient._id)}><img src={DeleteIcon} alt={texts.delete} className="delete-icon" /></button>
+                </div>
             </li>
             ))}
         </ul>
