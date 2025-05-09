@@ -1,4 +1,5 @@
 /** ======== ADMINISTRATION ======== **/
+
 /** ======== USERS ======== **/
 /** ======== TAGS ======== **/
 /** ======== CATEGORIES ======== **/
@@ -31,7 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0em;
+    padding: 0.4em;
     padding-left: 1em;
     margin-right: 1em;
 }
@@ -43,7 +44,8 @@
 .unitTypeSelect {
     width: 5em;
     height: 2em;
-    padding: 0 1em;
+    margin-right: 8px;
+    padding: 0 10px 5px;
     color: var(--primary);
     border-radius: .25em;
     background-color: var(--dark-tertiary);
@@ -52,6 +54,9 @@
     outline: 10px red;
     border: 0;
     box-shadow: none;
+}
+.unitTypeSelect::after {
+    vertical-align: center;
 }
 
 .DeleteButton {

@@ -128,7 +128,6 @@ button:active {
 .auth-section {
   display: flex;
   align-items: center;
-  width: 2em;
 }
 
 .profile-picture{
@@ -160,7 +159,7 @@ button:active {
   cursor: pointer;
 }
 
-.user-account:active {
+.user-icon:active {
   transform: scale(0.95);
 }
 
