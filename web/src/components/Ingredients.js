@@ -44,6 +44,7 @@ const Ingredients = ({ authToken }) => {
       };
       try {
         const response = await axios.post('http://localhost:5000/api/ingredients', newFullIngredient, config);
+        setSuccess('Ingredient Added Successfully !')
       } catch (error) {
         console.error(error.response)
       }
@@ -53,6 +54,23 @@ const Ingredients = ({ authToken }) => {
     }
   };
 
+  const handleChangeUnit = async (e) => {
+    const NewUnit = e.target.value;
+    const updatedIngredient = { unitType: NewUnit };
+    const token = localStorage.getItem('authToken');
+    const config = {
+        headers: { Authorization: `Bearer ${token}` },
+    };
+    try {
+      const response = await axios.put(`http://localhost:5000/api/ingredients/${e.target.id}`, updatedIngredient, config);
+      setSuccess('Ingredient Edited Successfully !')
+    } catch (error) {
+        console.error(error.response)
+    }
+    const response = await axios.get('http://localhost:5000/api/ingredients', config);
+    setIngredients(response.data);
+  };
+
   const handleDeleteIngredient = async (id) => {
     const token = localStorage.getItem('authToken');
     const config = {
@@ -60,6 +78,7 @@ const Ingredients = ({ authToken }) => {
     };
     try {
         const response = await axios.delete(`http://localhost:5000/api/ingredients/${id}`, config);
+        setSuccess('Ingredient Deleted Successfully !')
     } catch (error) {
         console.error(error.response)
     }
@@ -71,6 +90,7 @@ const Ingredients = ({ authToken }) => {
   return (
     <div className="ingredients-container">
       {error && <p style={{ color: 'red' }}>{error}</p>}
+      {success && <p style={{ color: 'green' }}>{success}</p>}
       <h1>{ texts.ingredients }</h1>
       <div className="addIngredient">
         <input
@@ -91,10 +111,10 @@ const Ingredients = ({ authToken }) => {
             <li key={index} className="ingredient">
                 {ingredient.title}
                 <div className='actionButtons'>
-                  <select id="unit" value="unit" className='unitTypeSelect'>
+                  <select id={ingredient._id} value={ingredient.unitType} className='unitTypeSelect' onChange={handleChangeUnit}>
+                    <option>aucun</option>
                     <option>g</option>
                     <option>L</option>
-                    <option>aucun</option>
                   </select>
                   <button className="PictureButton"><img src={PictureIcon} /></button>
                   <button className="DeleteButton" onClick={() => handleDeleteIngredient(ingredient._id)}><img src={DeleteIcon} alt={texts.delete} className="delete-icon" /></button>
