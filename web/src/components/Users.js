@@ -26,14 +26,21 @@ const Users = ({ authToken }) => {
   }, [authToken]);
 
   return (
-    <div className="user-container">
+    <div className="ad_users-container">
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>{success}</p>}
+      <ul className="ad_users">
       {users && users.map((user, index) => (
-        <li key={index} className="user-item">
+        <li key={index} className="ad_user-li">
+            <div className="ad_user">
+            {user.profilePicture && (
+              <img src={'http://localhost:3000/' + user.profilePicture} />
+            )}
             {user.username}
+            </div>
         </li>
         ))}
+        </ul>
     </div>
   );
 };

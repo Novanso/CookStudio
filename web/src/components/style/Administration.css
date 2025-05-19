@@ -1,6 +1,44 @@
 /** ======== ADMINISTRATION ======== **/
 
 /** ======== USERS ======== **/
+.ad_users-container {
+    margin: 0 auto;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap:2em
+}
+
+.ad_users {
+    background-color: var(--dark-primary);
+    border-radius: 10px;
+    padding: 8px;
+    padding-left: 2em;
+}
+
+.ad_users > li + li {
+    border-top: 3px solid var(--dark-tertiary);
+}
+
+.ad_user-li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8em;
+    margin-right: 1em;
+}
+
+.ad_user img {
+    width: 2em;
+    margin-right: 2em;
+    border-radius: 10%;
+}
+.ad_user {
+    display: flex;
+    align-items: center;
+}
+
+
 /** ======== TAGS ======== **/
 /** ======== CATEGORIES ======== **/
 /** ======== EXTERNAL ACCESS ======== **/
@@ -28,7 +66,11 @@
     padding-left: 2em;
 }
 
-.ingredient {
+.ingredients > li + li {
+    border-top: 3px solid var(--dark-tertiary);
+}
+
+.ingredient-li {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -37,8 +79,13 @@
     margin-right: 1em;
 }
 
-.ingredients > li + li {
-    border-top: 3px solid var(--dark-tertiary);
+.ingredient img {
+    width: 2em;
+    margin-right: 2em;
+}
+.ingredient {
+    display: flex;
+    align-items: center;
 }
 
 .unitTypeSelect {
@@ -63,13 +110,29 @@
     margin-right:15px
 }
 
-.ingredient button {
+.ingredient-li button, .ingredient label {
     padding: 7px;
 }
-
-.ingredient button img{
+.ingredient-li button img{
     padding: 0px;
     width: 1em;
+    cursor: pointer;
+}
+.ingredient-li label {
+    padding: 0px;
+    height: auto;
+}
+.ingredient-li label img {
+    padding: 0px;
+    width: 2em;
+    cursor: pointer; 
+}
+.ingredientsActionButtons {
+    display: flex;
+    align-items: center;
+}
+.ingredientsActionButtons input[type="file"] {
+ display: none;
 }
 
 /** ======== STATS ======== **/
