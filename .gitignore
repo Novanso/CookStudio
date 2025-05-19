@@ -15,6 +15,7 @@
 
 # data
 /web/public/profiles/
+/web/public/ingredients/
 /data/ingredients/
 /data/profiles/
 /data/recipes/

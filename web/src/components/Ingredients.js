@@ -3,6 +3,7 @@ import axios from 'axios';
 import { LanguageContext } from '../context/LanguageContext';
 
 import DeleteIcon from '../icons/Delete.svg';
+import EditPictureIcon from '../icons/EditPicture.svg';
 import PictureIcon from '../icons/Picture.svg';
 import AddIcon from '../icons/Add.svg';
 
@@ -62,13 +63,37 @@ const Ingredients = ({ authToken }) => {
         headers: { Authorization: `Bearer ${token}` },
     };
     try {
-      const response = await axios.put(`http://localhost:5000/api/ingredients/${e.target.id}`, updatedIngredient, config);
+      const response = await axios.put(`http://localhost:5000/api/ingredients/${e.target.parentNode.id}`, updatedIngredient, config);
       setSuccess('Ingredient Edited Successfully !')
+      setError(null);
     } catch (error) {
-        console.error(error.response)
+      setError('Failed to Edit Ingredient')
+      setSuccess(null);
     }
     const response = await axios.get('http://localhost:5000/api/ingredients', config);
     setIngredients(response.data);
+  };
+
+  const handlePicture = async (e) => {
+    const ingredientID = e.target.parentNode.id;
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      const config = {
+        headers: { 
+          Authorization: `Bearer ${authToken}`,
+          'Content-Type': 'multipart/form-data'
+        },
+      };
+      const response = await axios.put(`http://localhost:5000/api/ingredients/${ingredientID}`, formData, config);
+      setSuccess("ingredient updated succesfully");
+      setError(null);
+    } catch (error) {
+      setError("failed to update ingredient");
+      setSuccess(null);
+    }
   };
 
   const handleDeleteIngredient = async (id) => {
@@ -108,15 +133,25 @@ const Ingredients = ({ authToken }) => {
         </div>
         <ul className="ingredients">
             {ingredients.map((ingredient, index) => (
-            <li key={index} className="ingredient">
-                {ingredient.title}
-                <div className='actionButtons'>
-                  <select id={ingredient._id} value={ingredient.unitType} className='unitTypeSelect' onChange={handleChangeUnit}>
+            <li key={ingredient._id} className="ingredient-li">
+                <div className='ingredient' id={ingredient._id}>
+                {ingredient.image && (
+                  <img src={'http://localhost:3000/' + ingredient.image} />
+                )}
+                {!ingredient.image && (
+                  <img src={PictureIcon} />
+                )}
+                  {ingredient.title}
+                </div>
+                <div className='ingredientsActionButtons' id={ingredient._id}>
+                  <select key={ingredient._id} value={ingredient.unitType} className='unitTypeSelect' onChange={handleChangeUnit}>
                     <option>aucun</option>
                     <option>g</option>
                     <option>L</option>
+                    <option>pincées</option>
                   </select>
-                  <button className="PictureButton"><img src={PictureIcon} /></button>
+                  <label className="PictureButton" htmlFor={'input_' + ingredient._id}><img src={EditPictureIcon} /></label>
+                  <input type="File" id={'input_' + ingredient._id} onChange={handlePicture}></input>
                   <button className="DeleteButton" onClick={() => handleDeleteIngredient(ingredient._id)}><img src={DeleteIcon} alt={texts.delete} className="delete-icon" /></button>
                 </div>
             </li>
