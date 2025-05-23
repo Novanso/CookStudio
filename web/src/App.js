@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
 // Components
+import Auth from './components/Auth';
 import Home from './components/Home';
 import RecipeList from './components/RecipeList';
 import BookList from './components/BookList';
 import Calendar from './components/Calendar';
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
 import BookDetails from './components/BookDetails';
 import RecipeDetails from './components/RecipeDetails';
 import VerticalBar from './components/VerticalBar';
@@ -36,8 +35,8 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     setAuthToken(token);
-    if (!token && location.pathname !== '/register') {
-      navigate('/login');
+    if (!token) {
+      navigate('/auth');
     }
   }, [navigate, location.pathname]);
 
@@ -75,18 +74,21 @@ function App() {
         <HorizontalBar />
         <div className={`${authToken ? "" : "login-"}content`}>
           <Routes>
+            <Route path="/auth" element={<Auth onLogin={handleLogin} />} />
             <Route path="/" element={<Home />} />
             <Route path="/recipes" element={<RecipeList />} />
             <Route path="/books" element={<BookList />} />
             <Route path="/calendar" element={<Calendar />} />
-            <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
-            <Route path="/register" element={<RegisterForm />} />
             <Route path="/books/:id" element={<BookDetails />} />
             <Route path="/recipes/:id" element={<RecipeDetails />} />
           </Routes>
           {authToken && (
             <Routes>
               <Route path="/settings" element={<Settings authToken={authToken} />} />
+            </Routes>
+          )}
+          {authToken && role === 'SuperAdmin' &&(
+            <Routes>
               <Route path="/administration" element={<Administration authToken={authToken} />} />
             </Routes>
           )}

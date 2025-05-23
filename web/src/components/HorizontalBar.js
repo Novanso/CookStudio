@@ -130,7 +130,7 @@ const HorizontalBar = () => {
                           <span>{username}</span>
                         </div>
                         <button onClick={handleAccount}><img src={SettingsIcon}/>Settings</button>
-                        {role == 'admin' && <button onClick={handleAdmin}><img src={AdminIcon}/>Admin Section</button> }
+                        {role == 'SuperAdmin' && <button onClick={handleAdmin}><img src={AdminIcon}/>Admin Section</button> }
                         <button onClick={handleLogout}><img src={LogoutIcon} />Logout</button>
                     </div>
                     )}
