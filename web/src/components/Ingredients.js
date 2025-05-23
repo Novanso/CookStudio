@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { LanguageContext } from '../context/LanguageContext';
+import { ToastContainer, toast } from 'react-toastify';
 
 import DeleteIcon from '../icons/Delete.svg';
 import EditPictureIcon from '../icons/EditPicture.svg';
@@ -12,8 +13,6 @@ import AddIcon from '../icons/Add.svg';
 const Ingredients = ({ authToken }) => {
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState('');
-  const [success, setSuccess] = useState(null);
-  const [error, setError] = useState(null);
   const { texts } = useContext(LanguageContext);
 
   useEffect(() => {
@@ -25,7 +24,7 @@ const Ingredients = ({ authToken }) => {
         const response = await axios.get('http://localhost:5000/api/ingredients', config);
         setIngredients(response.data);
       } catch (error) {
-        setError('Failed to fetch ingredients');
+        toast.error('Failed to fetch Ingredient',{position: "bottom-right",theme: "dark",pauseOnHover: false});
       }
     };
 
@@ -44,14 +43,14 @@ const Ingredients = ({ authToken }) => {
         headers: { Authorization: `Bearer ${token}` },
       };
       try {
-        const response = await axios.post('http://localhost:5000/api/ingredients', newFullIngredient, config);
-        setSuccess('Ingredient Added Successfully !')
+        const add = await axios.post('http://localhost:5000/api/ingredients', newFullIngredient, config);
+        toast.success('Ingredient Added Successfully !',{position: "bottom-right",theme: "dark",pauseOnHover: false});
       } catch (error) {
-        console.error(error.response)
+        toast.error('Failed to delete Ingredient',{position: "bottom-right",theme: "dark",pauseOnHover: false});
       }
       const response = await axios.get('http://localhost:5000/api/ingredients', config);
-        setIngredients(response.data);
-        setNewIngredient('');
+      setIngredients(response.data);
+      setNewIngredient('');
     }
   };
 
@@ -63,12 +62,10 @@ const Ingredients = ({ authToken }) => {
         headers: { Authorization: `Bearer ${token}` },
     };
     try {
-      const response = await axios.put(`http://localhost:5000/api/ingredients/${e.target.parentNode.id}`, updatedIngredient, config);
-      setSuccess('Ingredient Edited Successfully !')
-      setError(null);
+      const update = await axios.put(`http://localhost:5000/api/ingredients/${e.target.parentNode.id}`, updatedIngredient, config);
+      toast.success('Ingredient Updated Successfully !',{position: "bottom-right",theme: "dark",pauseOnHover: false});
     } catch (error) {
-      setError('Failed to Edit Ingredient')
-      setSuccess(null);
+      toast.error('Failed to update Ingredient',{position: "bottom-right",theme: "dark",pauseOnHover: false});
     }
     const response = await axios.get('http://localhost:5000/api/ingredients', config);
     setIngredients(response.data);
@@ -88,11 +85,9 @@ const Ingredients = ({ authToken }) => {
         },
       };
       const response = await axios.put(`http://localhost:5000/api/ingredients/${ingredientID}`, formData, config);
-      setSuccess("ingredient updated succesfully");
-      setError(null);
+      toast.success('Ingredient Updated Successfully !',{position: "bottom-right",theme: "dark",pauseOnHover: false});
     } catch (error) {
-      setError("failed to update ingredient");
-      setSuccess(null);
+      toast.error('Failed to update Ingredient',{position: "bottom-right",theme: "dark",pauseOnHover: false});
     }
   };
 
@@ -103,9 +98,9 @@ const Ingredients = ({ authToken }) => {
     };
     try {
         const response = await axios.delete(`http://localhost:5000/api/ingredients/${id}`, config);
-        setSuccess('Ingredient Deleted Successfully !')
+        toast.success('Ingredient Successfully Deleted !',{position: "bottom-right",theme: "dark",pauseOnHover: false});
     } catch (error) {
-        console.error(error.response)
+      toast.error('Failed to delete Ingredient',{position: "bottom-right",theme: "dark",pauseOnHover: false});
     }
     const response = await axios.get('http://localhost:5000/api/ingredients', config);
     setIngredients(response.data);
@@ -114,8 +109,7 @@ const Ingredients = ({ authToken }) => {
 
   return (
     <div className="ingredients-container">
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
+      <ToastContainer />
       <h1>{ texts.ingredients }</h1>
       <div className="addIngredient">
         <input
@@ -145,10 +139,9 @@ const Ingredients = ({ authToken }) => {
                 </div>
                 <div className='ingredientsActionButtons' id={ingredient._id}>
                   <select key={ingredient._id} value={ingredient.unitType} className='unitTypeSelect' onChange={handleChangeUnit}>
-                    <option>aucun</option>
+                    <option>nb</option>
                     <option>g</option>
                     <option>L</option>
-                    <option>pincées</option>
                   </select>
                   <label className="PictureButton" htmlFor={'input_' + ingredient._id}><img src={EditPictureIcon} /></label>
                   <input type="File" id={'input_' + ingredient._id} onChange={handlePicture}></input>

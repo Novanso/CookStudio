@@ -38,6 +38,47 @@
     align-items: center;
 }
 
+.usersActionButtons {
+    display: flex;
+    align-items: center;
+}
+.usersActionButtons input[type="file"] {
+ display: none;
+}
+
+.ad_user-li button img{
+    padding: 0px;
+    width: 1em;
+    cursor: pointer;
+}
+.ad_user-li label {
+    padding: 0px;
+    height: auto;
+}
+.ad_user-li label img {
+    padding: 0px;
+    width: 2em;
+    cursor: pointer; 
+}
+
+.userRoleSelect {
+    width: 8em;
+    height: 2em;
+    margin-right: 8px;
+    padding: 0 10px 5px;
+    color: var(--primary);
+    border-radius: .25em;
+    background-color: var(--dark-tertiary);
+    background-image: none;
+    cursor: pointer;
+    outline: 10px red;
+    border: 0;
+    box-shadow: none;
+    text-overflow: ellipsis;  
+}
+.userRoleSelect::after {
+    vertical-align: center;
+}
 
 /** ======== TAGS ======== **/
 /** ======== CATEGORIES ======== **/
