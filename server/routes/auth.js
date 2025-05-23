@@ -7,7 +7,7 @@ require('dotenv').config();
 
 
 router.post('/register', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, role } = req.body;
 
   try {
     const existingUser = await User.findOne({ username });
@@ -18,6 +18,7 @@ router.post('/register', async (req, res) => {
     const newUser = new User({
       username,
       password: hashedPassword,
+      role,
     });
     await newUser.save();
     res.status(201).json({ message: 'User registered successfully' });

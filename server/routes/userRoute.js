@@ -67,4 +67,18 @@ router.get('/api/users', auth, async (req, res) => {
   }
 });
 
+router.delete('/api/users/:id', auth, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await User.findByIdAndDelete(id);
+    if (!user) {
+      return res.status(404).send({ error: 'User not found' });
+    }
+    res.send({ message: 'User deleted' });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 module.exports = router;
