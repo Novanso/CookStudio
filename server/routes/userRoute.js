@@ -67,6 +67,30 @@ router.get('/api/users', auth, async (req, res) => {
   }
 });
 
+// Update an User by ID
+router.put('/api/users/:id', auth, async (req, res) => {
+  const { id } = req.params;
+  const { username, role } = req.body;
+
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).send({ error: 'User not found' });
+    }
+    if (username) {
+      user.username = username;
+    }
+    if (role) {
+      user.role = role;
+    }
+    await user.save();
+    res.send(user);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// Delete an User by ID
 router.delete('/api/users/:id', auth, async (req, res) => {
   const { id } = req.params;
 

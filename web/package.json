@@ -8,6 +8,7 @@
         "color-calendar": "^1.0.7",
         "context": "^3.0.33",
         "date-fns": "^2.28.0",
+        "primereact": "^10.9.5",
         "react": "^19.0.0",
         "react-calendar": "^5.1.0",
         "react-dom": "^19.0.0",

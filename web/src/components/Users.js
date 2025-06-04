@@ -1,15 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { LanguageContext } from '../context/LanguageContext';
 import { ToastContainer, toast } from 'react-toastify';
 
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { Button } from 'primereact/button';
+        
+
 import DeleteIcon from '../icons/Delete.svg';
-import EditPictureIcon from '../icons/EditPicture.svg';
 import PictureIcon from '../icons/Picture.svg';
 
 const Users = ({ authToken }) => {
   const [users, setUsers] = useState(null);
   const { texts } = useContext(LanguageContext);
+
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -28,12 +32,37 @@ const Users = ({ authToken }) => {
   }, [authToken]);
 
   const handleChangeRole = async (e) => {
-    console.log('test')
+    const NewRole = e.target.value;
+    const updatedUser = { role: NewRole };
+    const token = localStorage.getItem('authToken');
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    try {
+      const update = await axios.put(`http://localhost:5000/api/users/${e.target.parentNode.id}`, updatedUser, config);
+      toast.success('User Updated Successfully !',{position: "bottom-right",theme: "dark",pauseOnHover: false});
+    } catch (error) {
+      toast.error('Failed to update User',{position: "bottom-right",theme: "dark",pauseOnHover: false});
+    }
+    const response = await axios.get('http://localhost:5000/api/users', config);
+    setUsers(response.data);
   }
-  const handlePicture = async (e) => {
-    console.log('test')
-  }
-  const handleDeleteUser = async (id) => {
+
+  
+  const confirm = async (id) => {
+    confirmDialog({
+      message: 'Do you want to delete this user?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      defaultFocus: 'reject',
+      acceptClassName: 'p-button-danger',
+      accept: () => handledeleteuser(id),
+      reject
+    });
+  };
+  const reject = () => {}
+
+  const handledeleteuser = async (id) => {
     const token = localStorage.getItem('authToken');
     const config = {
         headers: { Authorization: `Bearer ${token}` },
@@ -51,6 +80,7 @@ const Users = ({ authToken }) => {
   return (
     <div className="ad_users-container">
       <ToastContainer />
+      <ConfirmDialog />
       <ul className="ad_users">
       {users && users.map((user, index) => (
         <li key={index} className="ad_user-li">
@@ -69,9 +99,7 @@ const Users = ({ authToken }) => {
                 <option>Admin</option>
                 <option>User</option>
               </select>
-              <label className="PictureButton" htmlFor={'input_' + user._id}><img src={EditPictureIcon} /></label>
-              <input type="File" id={'input_' + user._id} onChange={handlePicture}></input>
-              <button className="DeleteButton" onClick={() => handleDeleteUser(user._id)}><img src={DeleteIcon} alt={texts.delete} className="delete-icon" /></button>
+              <Button onClick={() => confirm(user._id)} label="Delete" severity="danger"></Button>
             </div>
         </li>
         ))}

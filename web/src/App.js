@@ -26,6 +26,10 @@ import './components/style/RecipeDetails.css'
 import './components/style/RecipeList.css'
 import './components/style/Settings.css'
 
+
+import "primereact/resources/themes/lara-dark-blue/theme.css";
+
+
 function App() {
   const [authToken, setAuthToken] = useState(null);
   const [role, setRole] = useState('');
