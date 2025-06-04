@@ -1,5 +1,23 @@
 /** ======== ADMINISTRATION ======== **/
 
+.active-admin-button {
+  background-color: var(--dark-tertiary);
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+}
+.admin-button {
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+}
+.admin-button:hover {
+  background-color: var(--dark-tertiary);
+}
+.admin-button:active {
+  transform: scale(0.99);
+}
+
 /** ======== USERS ======== **/
 .ad_users-container {
     margin: 0 auto;
@@ -65,7 +83,6 @@
     width: 8em;
     height: 2em;
     margin-right: 8px;
-    padding: 0 10px 5px;
     color: var(--primary);
     border-radius: .25em;
     background-color: var(--dark-tertiary);
@@ -133,7 +150,6 @@
     width: 5em;
     height: 2em;
     margin-right: 8px;
-    padding: 0 10px 5px;
     color: var(--primary);
     border-radius: .25em;
     background-color: var(--dark-tertiary);
